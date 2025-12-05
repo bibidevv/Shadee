@@ -1,69 +1,82 @@
 INSERT INTO shadee_dev.product (name, description, image, price) VALUES
-('Fond de teint léger SPF 20', 'Un fond de teint léger pour un teint naturel et protégé du soleil. Convient à tous les types de peau.', 'images/fond-teint-leger-spf20.jpg', 24.99),
-('Fond de teint matifiant SPF 30', 'Un fond de teint matifiant pour les peaux grasses, avec protection solaire.', 'images/fond-teint-matifiant-spf30.jpg', 29.99),
-('Correcteur éclaircissant', 'Correcteur pour cernes et imperfections, teinte claire.', 'images/correcteur-eclaircissant.jpg', 19.99),
-('Correcteur moyen', 'Correcteur pour cernes et imperfections, teinte moyenne.', 'images/correcteur-moyen.jpg', 19.99),
-('Poudre libre transparente', 'Poudre libre pour fixer le maquillage, convient à tous les types de peau.', 'images/poudre-libre-transparente.jpg', 14.99),
-('Blush rosé', 'Blush pour un effet bonne mine, teinte rosée.', 'images/blush-rose.jpg', 17.99),
-('Blush corail', 'Blush pour un effet bonne mine, teinte corail.', 'images/blush-corail.jpg', 17.99),
-('Highlighter doré', 'Highlighter pour un éclat lumineux, teinte dorée.', 'images/highlighter-dore.jpg', 22.99),
-('Highlighter argenté', 'Highlighter pour un éclat lumineux, teinte argentée.', 'images/highlighter-argente.jpg', 22.99),
-('Rouge à lèvres rouge', 'Rouge à lèvres mat, teinte rouge classique.', 'images/rouge-levres-rouge.jpg', 12.99),
-('Rouge à lèvres nude', 'Rouge à lèvres mat, teinte nude naturelle.', 'images/rouge-levres-nude.jpg', 12.99),
-('Mascara volume', 'Mascara pour des cils ultra-volumineux, noir intense.', 'images/mascara-volume.jpg', 15.99),
-('Eyeliner noir', 'Eyeliner précis, noir intense, longue tenue.', 'images/eyeliner-noir.jpg', 13.99),
-('Palettes fards à paupières', 'Palettes de 12 fards à paupières, teintes variées.', 'images/palette-fards.jpg', 27.99),
-('Sourcils gel', 'Gel pour sourcils, fixe et discipline les sourcils toute la journée.', 'images/sourcils-gel.jpg', 11.99);
+('Fenty Beauty Pro Filt\'r Soft Matte Longwear Foundation', 'Fond de teint liquide mat longue tenue, couvrance moyenne à totale, pour un fini peau nette sans brillance.', 'images/fenty-pro-filtr-soft-matte-longwear-foundation.jpg', 39.90),
+('Fenty Beauty Pro Filt\'r Hydrating Longwear Foundation', 'Fond de teint hydratant et confortable, couvrance modulable, idéal peaux normales à sèches.', 'images/fenty-pro-filtr-hydrating-longwear-foundation.jpg', 38.00),
+('Fenty Beauty Pro Filt\'r Soft Matte Powder Foundation', 'Fond de teint poudre mat, tenue longue durée et effet peau lisse, pratique pour retouches.', 'images/fenty-pro-filtr-soft-matte-powder-foundation.jpg', 34.00),
+('Fenty Beauty Eaze Drop Blurring Skin Tint', 'Skin-tint fluide effet seconde peau, unifie légèrement le teint pour un rendu naturel.', 'images/fenty-eaze-drop-blurring-skin-tint.jpg', 36.00),
+('Fenty Beauty Pro Filt\'r Instant Retouch Concealer', 'Anti-cernes et correcteur haute couvrance, corrige cernes et imperfections avec un fini naturel.', 'images/fenty-pro-filtr-instant-retouch-concealer.jpg', 29.90),
+('Charlotte Tilbury Airbrush Flawless Foundation', 'Fond de teint liquide couvrant et lumineux, unifie le teint pour un fini peau parfaite.', 'images/charlotte-tilbury-airbrush-flawless-foundation.jpg', 52.00),
+('Charlotte Tilbury Light Wonder Foundation', 'Fond de teint léger effet “peau nue”, texture fluide pour un teint frais et naturel.', 'images/charlotte-tilbury-light-wonder-foundation.jpg', 52.00),
+('Charlotte Tilbury Magic Away Concealer', 'Anti-cernes crémeux et lumineux, corrige cernes et taches pour un regard reposé.', 'images/charlotte-tilbury-magic-away-concealer.jpg', 35.00),
+('NARS Sheer Glow Foundation', 'Fond de teint liquide radiant qui unifie le teint et donne de l’éclat sans effet masque.', 'images/nars-sheer-glow-foundation.jpg', 44.95),
+('NARS Natural Radiant Longwear Foundation', 'Fond de teint longue tenue, couvrance modulable et fini naturel lumineux pour toutes peaux.', 'images/nars-natural-radiant-longwear-foundation.jpg', 46.00),
+('NARS Velvet Matte Skin Tint', 'Skin tint mat léger, unifie subtilement le teint pour un fini naturel et durable.', 'images/nars-velvet-matte-skin-tint.jpg', 40.00),
+('NARS Radiant Creamy Concealer', 'Correcteur/anticernes crémeux et lumineux, camoufle cernes et irrégularités pour un regard frais.', 'images/nars-radiant-creamy-concealer.jpg', 39.00),
+('NARS Soft Matte Complete Concealer', 'Correcteur mat mais crémeux, camouflage naturel des cernes et rougeurs, fini velouté.', 'images/nars-soft-matte-complete-concealer.jpg', 38.00),
+('Kevyn Aucoin The Sensual Skin Enhancer', 'Fond de teint / correcteur très couvrant, idéal pour camoufler imperfections ou uniformiser le teint.', 'images/kevyn-aucoin-sensual-skin-enhancer.jpg', 32.00),
+('Kevyn Aucoin The Etherealist Super Natural Concealer', 'Correcteur fluide haute définition, fini naturel et invisible pour cernes et irrégularités.', 'images/kevyn-aucoin-etherealist-super-natural-concealer.jpg', 29.95),
+('Kevyn Aucoin SSE Ultra-Correction Stick', 'Correcteur stick haute couvrance, pratique pour retouches et couvrir localement imperfections.', 'images/kevyn-aucoin-sse-ultra-correction-stick.jpg', 31.50),
+('Maybelline Fit Me Matte + Poreless Foundation', 'Fond de teint fluide matifiant, affine les pores et contrôle la brillance, idéal peaux mixtes à grasses.', 'images/maybelline-fit-me-matte-poreless-foundation.jpg', 9.95),
+('Maybelline Fit Me Dewy + Smooth Foundation', 'Fond de teint fluide pour un rendu glowy et naturel, bonne tenue pour peaux normales à sèches.', 'images/maybelline-fit-me-dewy-smooth-foundation.jpg', 10.95),
+('Maybelline SuperStay Full Coverage Foundation', 'Fond de teint couvrance totale, tenue longue durée, idéal pour un maquillage uniforme toute la journée.', 'images/maybelline-superstay-full-coverage-foundation.jpg', 11.99),
+('Maybelline Instant Age Rewind Concealer', 'Anti-cernes fluide avec applicateur éponge, couvre cernes, poches et imperfections.', 'images/maybelline-instant-age-rewind-concealer.jpg', 10.99),
+('Maybelline Fit Me Concealer', 'Correcteur fluide, couvre cernes et petites imperfections avec un fini naturel.', 'images/maybelline-fit-me-concealer.jpg', 9.99),
+('Maybelline Instant Age Rewind Brightener', 'Correcteur/illuminateur pour le contour des yeux, pour un regard lumineux et reposé.', 'images/maybelline-instant-age-rewind-brightener.jpg', 11.50),
+('Maybelline SuperStay Concealer', 'Correcteur haute couvrance, longue tenue, idéal pour masquer imperfections et uniformiser le teint.', 'images/maybelline-superstay-concealer.jpg', 12.99),
+('L’Oréal Paris True Match Foundation', 'Fond de teint liquide modulable, fini naturel, très large choix de teintes, pour tous types de peau.', 'images/loreal-true-match-foundation.jpg', 14.99),
+('L’Oréal Paris Infallible 24H Fresh Wear Foundation', 'Fond de teint longue tenue, couvrance modulable et confortable, tenue 24 h, pour un teint unifié tout au long de la journée.', 'images/loreal-infallible-24h-fresh-wear-foundation.jpg', 15.99),
+('L’Oréal Paris Infallible Matte Cover Foundation', 'Fond de teint matifiant longue tenue, contrôle la brillance, idéal peaux mixtes à grasses.', 'images/loreal-infallible-matte-cover-foundation.jpg', 15.99),
+('L’Oréal Paris Infallible 24H Fresh Wear Foundation Concealer', 'Correcteur fluide longue tenue, couvre imperfections et cernes pour un teint homogène.', 'images/loreal-infallible-fresh-wear-concealer.jpg', 14.99),
+('MAC Studio Fix Fluid Foundation', 'Fond de teint liquide culte, couvrance modulable et tenue longue durée, fini naturel matifié.', 'images/mac-studio-fix-fluid-foundation.jpg', 38.00),
+('MAC Pro Longwear Concealer', 'Correcteur longue tenue haute couvrance, idéal pour cernes et imperfections persistantes.', 'images/mac-pro-longwear-concealer.jpg', 38.00);
 
 
 INSERT INTO shadee_dev.product_undertone (product_id, undertone_id) VALUES
-(1, 1), (1, 3),  -- Fond de teint léger SPF 20 : chaud, neutre
-(2, 2), (2, 3),  -- Fond de teint matifiant SPF 30 : froid, neutre
-(3, 1),          -- Correcteur éclaircissant : chaud
-(4, 2),          -- Correcteur moyen : froid
-(5, 3),          -- Poudre libre transparente : neutre
-(6, 1),          -- Blush rosé : chaud
-(7, 2),          -- Blush corail : froid
-(8, 1),          -- Highlighter doré : chaud
-(9, 2),          -- Highlighter argenté : froid
-(10, 1),         -- Rouge à lèvres rouge : chaud
-(11, 3),         -- Rouge à lèvres nude : neutre
-(12, 3),         -- Mascara volume : neutre
-(13, 3),         -- Eyeliner noir : neutre
-(14, 1), (14, 2),-- Palettes fards à paupières : chaud, froid
-(15, 3);         -- Sourcils gel : neutre
+(1, 1), (1, 3),  
+(2, 2), (2, 3),  
+(3, 1),          
+(4, 2),          
+(5, 3),          
+(6, 1),          
+(7, 2),         
+(8, 1),         
+(9, 2),        
+(10, 1),         
+(11, 3),         
+(13, 3),         
+(14, 1), (14, 2),
+(15, 3);         
 
 INSERT INTO shadee_dev.product_skin_type (product_id, skin_type_id) VALUES
-(1, 1), (1, 2), (1, 3), (1, 4),  -- Fond de teint léger SPF 20 : tous types
-(2, 2), (2, 3),                  -- Fond de teint matifiant SPF 30 : grasse, mixte
-(3, 1), (3, 4),                  -- Correcteur éclaircissant : sèche, normale
-(4, 2), (4, 3),                  -- Correcteur moyen : grasse, mixte
-(5, 1), (5, 2), (5, 3), (5, 4),  -- Poudre libre transparente : tous types
-(6, 1), (6, 4),                  -- Blush rosé : sèche, normale
-(7, 2), (7, 3),                  -- Blush corail : grasse, mixte
-(8, 1), (8, 4),                  -- Highlighter doré : sèche, normale
-(9, 2), (9, 3),                  -- Highlighter argenté : grasse, mixte
-(10, 1), (10, 4),                -- Rouge à lèvres rouge : sèche, normale
-(11, 2), (11, 3),                -- Rouge à lèvres nude : grasse, mixte
-(12, 1), (12, 2), (12, 3), (12, 4), -- Mascara volume : tous types
-(13, 1), (13, 2), (13, 3), (13, 4), -- Eyeliner noir : tous types
-(14, 1), (14, 4),                -- Palettes fards à paupières : sèche, normale
-(15, 2), (15, 3);                -- Sourcils gel : grasse, mixte
+(1, 1), (1, 2), (1, 3), (1, 4),  
+(2, 2), (2, 3),                  
+(3, 1), (3, 4),                  
+(4, 2), (4, 3),                  
+(5, 1), (5, 2), (5, 3), (5, 4),  
+(6, 1), (6, 4),                  
+(7, 2), (7, 3),                 
+(8, 1), (8, 4),                 
+(9, 2), (9, 3),                 
+(10, 1), (10, 4),                
+(11, 2), (11, 3),                
+(12, 1), (12, 2), (12, 3), (12, 4), 
+(13, 1), (13, 2), (13, 3), (13, 4), 
+(14, 1), (14, 4),                
+(15, 2), (15, 3);               
 
 INSERT INTO shadee_dev.product_skin_color (product_id, skin_color_id) VALUES
-(1, 1), (1, 2),  -- Fond de teint léger SPF 20 : clair, moyen
-(2, 1), (2, 2),  -- Fond de teint matifiant SPF 30 : clair, moyen
-(3, 1),          -- Correcteur éclaircissant : clair
-(4, 2),          -- Correcteur moyen : moyen
-(5, 1), (5, 2),  -- Poudre libre transparente : clair, moyen
-(6, 1), (6, 2),  -- Blush rosé : clair, moyen
-(7, 1), (7, 2),  -- Blush corail : clair, moyen
-(8, 1), (8, 2),  -- Highlighter doré : clair, moyen
-(9, 1), (9, 2),  -- Highlighter argenté : clair, moyen
-(10, 1), (10, 2),-- Rouge à lèvres rouge : clair, moyen
-(11, 1), (11, 2),-- Rouge à lèvres nude : clair, moyen
-(12, 1), (12, 2),-- Mascara volume : clair, moyen
-(13, 1), (13, 2),-- Eyeliner noir : clair, moyen
-(14, 1), (14, 2),-- Palettes fards à paupières : clair, moyen
-(15, 1), (15, 2);-- Sourcils gel : clair, moyen
+(1, 1), (1, 2), 
+(2, 1), (2, 2),  
+(3, 1),          
+(4, 2),          
+(5, 1), (5, 2),  
+(6, 1), (6, 2),  
+(7, 1), (7, 2),  
+(8, 1), (8, 2),  
+(9, 1), (9, 2),  
+(10, 1), (10, 2),
+(11, 1), (11, 2),
+(12, 1), (12, 2),
+(13, 1), (13, 2),
+(14, 1), (14, 2),
+(15, 1), (15, 2);
 

@@ -16,7 +16,7 @@ CREATE TABLE shadee_dev.product(
     id TINYINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(500) NOT NULL, 
     description TEXT NOT NULL, 
-    image VARCHAR(50) NOT NULL,
+    image VARCHAR(150) NOT NULL,
     price DECIMAL(5,2) UNSIGNED NOT NULL 
 ); 
 
