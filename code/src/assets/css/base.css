@@ -1,13 +1,80 @@
-/* polices */
+/* Polices */
 
-/*  variables css */
+@font-face {
+	font-family: "Marmelad";
+	src: url("../fonts/Marmelad-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Hind Madurai";
+	src: url("../fonts/HindMadurai-Light.ttf") format("truetype");
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Hind Madurai";
+	src: url("../fonts/HindMadurai-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
+}
+
+/* Variables pour polices et tailles */
+
 :root {
-}
-/* balises html*/
-* {
-	box-sizing: border-box;
+	--font-title: "Marmelad", sans-serif;
+	--font-subtitle: "Hind Madurai-SemiBold", sans-serif;
+	--font-regular: "Hind Madurai-Light", sans-serif;
+
+	--font-size-title: 36px;
+	--font-size-subtitle: 24px;
+	--font-size-regular: 12px;
 }
 
-img {
-	width: 100%;
+/* Titres et textes */
+
+h1 {
+	font-family: var(--font-title);
+	font-size: var(--font-size-title);
+}
+
+h2 {
+	font-family: var(--font-subtitle);
+	font-size: var(--font-size-subtitle);
+	font-weight: 600;
+}
+
+p,
+span,
+li,
+a {
+	font-family: var(--font-regular);
+	font-size: var(--font-size-regular);
+}
+
+/* Boutons */
+
+button {
+	font-family: var(--font-regular);
+	font-size: var(--font-size-regular);
+	border-radius: 9999px; /* capsule */
+	background-color: var(--color-primary);
+	color: var(--color-button-text);
+}
+
+button:hover {
+	background-color: var(--color-secondary);
+}
+
+/* Couleurs */
+
+:root {
+	--color-title: #5b2c10; /* h1 */
+	--color-subtitle: #7f5539; /* h2 et boutons primaires */
+	--color-icon: #ab7b5d; /* icônes */
+
+	--color-background: #ffffff;
+	--color-button-text: #fff;
 }

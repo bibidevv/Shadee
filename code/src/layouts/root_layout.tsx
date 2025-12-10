@@ -1,5 +1,5 @@
-import "../src/assets/css/reset.css";
-import "../src/assets/css/base.css";
+import "../assets/css/reset.css";
+import "../assets/css/base.css";
 import { Outlet } from "react-router";
 
 const RootLayout = () => {
@@ -12,7 +12,6 @@ const RootLayout = () => {
 				<title>Shadee</title>
 			</head>
 			<body>
-				<h1>hee hee</h1>
 				{/* outlet : zone remplie par un autre contenu */}
 				<Outlet />
 			</body>

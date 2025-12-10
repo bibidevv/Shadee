@@ -1,0 +1,73 @@
+.navbar {
+	position: relative;
+	width: 100%;
+	max-width: 393px; /* iPhone 16 */
+	height: 81px;
+	background-color: var(--color-background);
+	border-bottom: 1px solid var(--color-title);
+	display: flex;
+	align-items: center;
+	justify-content: space-between; /* menu gauche, logo centré, burger à droite */
+	padding: 0 20px;
+	box-sizing: border-box;
+}
+
+/* Menu gauche */
+.menu {
+	display: flex;
+	gap: 20px;
+}
+
+.menu a {
+	font-family: var(--font-regular);
+	color: var(--color-title);
+	text-decoration: none;
+}
+
+.menu a.active {
+	font-weight: 600;
+}
+
+/* Logo centré */
+.logo {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	height: 50px;
+	object-fit: contain;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 5;
+}
+
+/* Burger menu pour mobile */
+.burger {
+	display: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	z-index: 10;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+	.menu {
+		display: none;
+		flex-direction: column;
+		position: absolute;
+		top: 81px;
+		left: 0; /* menu glisse depuis la gauche */
+		background-color: var(--color-background);
+		width: 150px;
+		padding: 10px;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+	}
+
+	.menuVisible {
+		display: flex;
+	}
+
+	.burger {
+		display: block;
+	}
+}

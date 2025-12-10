@@ -1,9 +1,12 @@
 import { Outlet } from "react-router";
+import NavBar from "../components/navbar";
+
+// import NavBar from "../components/navbar";
 
 const PublicLayout = () => {
 	return (
 		<>
-			<h1>Public layout</h1>
+			<NavBar />
 			<Outlet />
 		</>
 	);

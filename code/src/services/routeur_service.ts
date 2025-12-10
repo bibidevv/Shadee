@@ -5,24 +5,43 @@ class RouteurService {
 		return [
 			{
 				// id unique de la route
-				id: "public",
+				id: "root",
 				// préfixe des routes
-				path: "",
+				path: "/",
 				// importation de la mise en page parente
 				lazy: () => import("../layouts/root_layout"),
 
 				children: [
 					{
 						id: "public",
-						index: true,
 						path: "",
-						lazy: () => import("../pages/index"),
+						lazy: () => import("../layouts/public_layout"),
+						children: [
+							{
+								id: "home",
+								index: true,
+								path: "",
+								lazy: () => import("../pages/"),
+							},
+
+							{
+								id: "contact",
+								path: "contact",
+								lazy: () => import("../pages/contact"),
+							},
+							// 👉 Ajouts ici
+							{
+								id: "products",
+								path: "products",
+								// lazy: () => import("../pages/products"),
+							},
+							{
+								id: "login",
+								path: "login",
+								// lazy: () => import("../pages/login"),
+							},
+						],
 					},
-					//     {
-					//       id: "about",
-					//       path: "about",
-					//       lazy: () => import("./about/route"),
-					//     },
 				],
 			},
 		] satisfies RSCRouteConfig;
