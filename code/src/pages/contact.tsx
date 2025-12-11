@@ -1,5 +1,12 @@
+import Seo from "../components/shared/seo";
+
 const Contact = () => {
-	return <h1>Contact</h1>;
+	return (
+		<>
+			<Seo title="Contact" description="Contact Page" url="/contact" />
+			<h1>Contact</h1>
+		</>
+	);
 };
 
 export default Contact;
