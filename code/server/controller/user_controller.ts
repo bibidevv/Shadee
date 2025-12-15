@@ -3,9 +3,9 @@ import UserRepository from "../repository/user_repository";
 
 class UserController {
 	// méthode reliée à la route en GET située dans le routeur
-	public index = async (_req: Request, res: Response) => {
+	public index = async (req: Request, res: Response) => {
 		// récuperation des résultats de la réponse
-		const results = await new UserRepository().selectOne();
+		const results = await new UserRepository().selectAll();
 
 		// si la requete renvoie une erreur
 		if (results instanceof Error) {
@@ -28,7 +28,7 @@ class UserController {
 	public selectOne = async (req: Request, res: Response) => {
 		console.log(req.params);
 		// récuperation des résultats de la réponse
-		const results = await new UserRepository().selectOne({ id: 1 });
+		const results = await new UserRepository().selectOne(req.params);
 
 		// si la requete renvoie une erreur
 		if (results instanceof Error) {

@@ -48,7 +48,7 @@ class UndertoneRepository {
 			const [query] = await connection.execute(sql, data);
 
 			// récuperer le premier indice d'un array
-			const result = (query as Undertone[]).shift();
+			const result = (query as Undertone[]).shift() as Undertone;
 
 			return result;
 		} catch (error) {

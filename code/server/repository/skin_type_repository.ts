@@ -47,7 +47,7 @@ class Skin_typeRepository {
 			const [query] = await connection.execute(sql, data);
 
 			// récuperer le premier indice d'un array
-			const result = (query as Skin_type[]).shift();
+			const result = (query as Skin_type[]).shift() as Skin_type;
 
 			return result;
 		} catch (error) {

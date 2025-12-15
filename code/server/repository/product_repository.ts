@@ -11,13 +11,25 @@ class ProductRepository {
 		const connection = await new MySQLService().connect();
 
 		// requête SQL
-		//SELECT menu.* FROM shadee_dev.menu;
+		//SELECT product.*,
+		// GROUP_CONCAT (undertone.id) AS undertone_ids
+		//  FROM shadee_dev.product
+		// JOIN shadee_dev.product_undertone
+		// ON product.id = product_undertone.product_id
+		// JOIN shadee_dev.undertone
+		// ON undertone.id = product_undertone.undertone_id
+		// GROUP BY product.id;
+
 		const sql = `
-        SELECT ${this.table}.*
-        FROM ${process.env.MYSQL_DATABASE}.${this.table};  
+        SELECT 
+		${this.table}.*, GROUP_CONCAT(skin_type_id) AS skin_type_ids
+        FROM 
+		${process.env.MYSQL_DATABASE}.${this.table}
+		JOIN 
+		;  
         `;
 
-		// try / catch : récuperer els résultats de la requete ou une erreur
+		// try / catch : récuperer les résultats de la requete ou une erreur
 		try {
 			const [query] = await connection.execute(sql);
 
@@ -26,6 +38,11 @@ class ProductRepository {
 			return error;
 		}
 	};
+
+	// clés étrangères
+	// result.product = (await new ProductRepository().selectOne({
+	// 	id: this.result.product_id,
+	// })) as Product;
 }
 
 export default ProductRepository;

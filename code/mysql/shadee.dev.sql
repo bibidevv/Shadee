@@ -115,8 +115,8 @@ VALUES
 -- user@user.fr / user
 INSERT INTO shadee_dev.user
 VALUES
-    (NULL, "admin@admin.fr", "$argon2i$v=19$m=16,t=2,p=1$ODc2VnZqdnNnZ3lQUnFobA$CNXArmmmxp81Q9A59hYrHA", 1),
-    (NULL, "user@user.fr", "$argon2i$v=19$m=16,t=2,p=1$OVBSYnpMOFQxeXh6Q0xOaw$Pgh1E9qfclkVJYe7CJDqug", 2)
+    (NULL, "admin@admin.fr", "$argon2i$v=19$m=16,t=2,p=1$ODc2VnZqdnNnZ3lQUnFobA$CNXArmmmxp81Q9A59hYrHA", 1, 1, 1, 1),
+    (NULL, "user@user.fr", "$argon2i$v=19$m=16,t=2,p=1$OVBSYnpMOFQxeXh6Q0xOaw$Pgh1E9qfclkVJYe7CJDqug", 2, 2, 2, 2)
 ;
 
 -- transaction sql 

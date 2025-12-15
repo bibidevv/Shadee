@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { NavLink } from "react-router";
 import styles from "../assets/css/navbar.module.css";
-import logo from "../assets/img/shadee logo.svg";
+import logo from "../assets/img/shadeelogo.svg";
 
 const NavBar = () => {
 	const [navMobileIsVisible, setNavMobileIsVisible] = useState(false);

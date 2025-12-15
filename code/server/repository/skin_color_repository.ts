@@ -48,7 +48,7 @@ class Skin_colorRepository {
 			const [query] = await connection.execute(sql, data);
 
 			// récuperer le premier indice d'un array
-			const result = (query as Skin_color[]).shift();
+			const result = (query as Skin_color[]).shift() as Skin_color;
 
 			return result;
 		} catch (error) {
