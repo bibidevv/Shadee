@@ -55,6 +55,30 @@ class UndertoneRepository {
 			return error;
 		}
 	};
+
+	public selectInList = async (
+		list: string,
+	): Promise<Undertone[] | unknown> => {
+		// connexion au serveur mysql
+		const connection = await new MySQLService().connect();
+
+		// requête SQL
+		//SELECT menu.* FROM shadee_dev.menu;
+		const sql = `
+        SELECT ${this.table}.*
+        FROM ${process.env.MYSQL_DATABASE}.${this.table}
+		WHERE ${this.table}.id IN (${list});  
+        `;
+
+		// try / catch : récuperer els résultats de la requete ou une erreur
+		try {
+			const [query] = await connection.execute(sql);
+
+			return query;
+		} catch (error) {
+			return error;
+		}
+	};
 }
 
 export default UndertoneRepository;

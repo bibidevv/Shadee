@@ -2,12 +2,11 @@ import type { Request, Response } from "express";
 import ProductRepository from "../repository/product_repository";
 
 class ProductController {
-	// méthode reliée à la route en GET située dans le routeur
+	// méthode GET /api/product
 	public index = async (_req: Request, res: Response) => {
-		// récuperation des résultats de la réponse
 		const results = await new ProductRepository().selectAll();
 
-		// si la requete renvoie une erreur
+		// gestion d'erreur
 		if (results instanceof Error) {
 			res.status(400).json({
 				status: 400,
@@ -17,10 +16,34 @@ class ProductController {
 			return;
 		}
 
-		// renvoyer une réponse avec un code de statut précis HTTP et au format JSON
+		// renvoyer la réponse
 		res.status(200).json({
 			status: 200,
 			message: "c'est le produit",
+			data: results,
+		});
+	};
+
+	// méthode POST /api/product
+	public insert = async (req: Request, res: Response) => {
+		console.log(req.body);
+
+		const results = await new ProductRepository().insert(req.body);
+
+		// gestion d'erreur
+		if (results instanceof Error) {
+			res.status(400).json({
+				status: 400,
+				message:
+					process.env.NODE_ENV === "production" ? "Error" : results.message,
+			});
+			return;
+		}
+
+		// renvoyer la réponse
+		res.status(201).json({
+			status: 201,
+			message: "Produit inséré avec succès",
 			data: results,
 		});
 	};

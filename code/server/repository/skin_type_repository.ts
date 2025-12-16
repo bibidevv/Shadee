@@ -6,7 +6,9 @@ class Skin_typeRepository {
 	private table = "skin_type";
 
 	// sélectionner tous les enregistrements
-	public selectAll = async (): Promise<Skin_type[] | unknown> => {
+	public selectInList = async (
+		list: string,
+	): Promise<Skin_type[] | unknown> => {
 		// connexion au serveur mysql
 		const connection = await new MySQLService().connect();
 
@@ -14,7 +16,8 @@ class Skin_typeRepository {
 		//SELECT menu.* FROM shadee_dev.menu;
 		const sql = `
         SELECT ${this.table}.*
-        FROM ${process.env.MYSQL_DATABASE}.${this.table};  
+        FROM ${process.env.MYSQL_DATABASE}.${this.table}
+		WHERE ${this.table}.id IN (${list});  
         `;
 
 		// try / catch : récuperer els résultats de la requete ou une erreur

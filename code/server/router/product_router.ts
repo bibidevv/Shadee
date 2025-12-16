@@ -1,15 +1,23 @@
 import express from "express";
-import MenuController from "../controller/product_controller";
+import multer from "multer";
+import ProductController from "../controller/product_controller";
 
 class ProductRouter {
 	// routeur express
 	private router = express.Router();
+
+	// multer permet de transferer des fichiers
+	private multer = multer({ dest: "public" });
 	// liste des routes
 	public getRoutes = () => {
-		// créer une route /API accessible en GET
-		// le prefixe des routes est dans le serveur
-		this.router.get("/", new MenuController().index);
+		// GET /api/product
+		this.router.get("/", new ProductController().index);
+
+		// POST /api/product et utilisation du middlewear multer
+		this.router.post("/", this.multer.any(), new ProductController().insert);
+
 		return this.router;
 	};
 }
+
 export default ProductRouter;
