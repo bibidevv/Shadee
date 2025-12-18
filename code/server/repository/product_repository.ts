@@ -65,7 +65,7 @@ GROUP BY ${this.table}.id;
 	): Promise<QueryResult | unknown> => {
 		const connection = await new MySQLService().connect();
 
-		let sql = `
+		const sql = `
 			INSERT INTO ${process.env.MYSQL_DATABASE}.${this.table}
 			VALUES (
 				NULL,
@@ -77,67 +77,70 @@ GROUP BY ${this.table}.id;
 		`;
 
 		try {
+			const [query] = await connection.execute(sql, data);
+			return query;
+		} catch (error) {
+			return error;
+		}
+	};
+
+	// update un enregitrement
+	public update = async (
+		data: Partial<Product>,
+	): Promise<QueryResult | unknown> => {
+		console.log("UPDATE DATA :", data);
+
+		const connection = await new MySQLService().connect();
+
+		let sql = `
+			UPDATE ${process.env.MYSQL_DATABASE}.${this.table}
+			SET 
+				name = :name,
+				description = :description,
+				image = :image,
+				price = :price
+			WHERE 
+				${this.table}.id = :id
+			;
+		`;
+
+		try {
 			// démarrer une transaction sql
 			await connection.beginTransaction();
 
-			// exécuter l'insert principal
+			// exécuter l'update principal
+			await connection.execute(sql, data);
+
+			sql = `
+				DELETE FROM
+				${process.env.MYSQL_DATABASE}.product_undertone
+				WHERE
+				product_undertone.product_id = :id
+			;
+			`;
 			const [query] = await connection.execute(sql, data);
 
-			// récupérer l'id inséré
-			sql = `SET @id = LAST_INSERT_ID();`;
+			sql = `SET @id = :id;`;
+			await connection.execute(sql, data);
+
+			const joinIds = data.undertone_ids
+				?.split(",")
+				.map((value) => `(${value}, @id)`)
+				.join(",");
+
+			sql = `
+				INSERT INTO ${process.env.MYSQL_DATABASE}.product_undertone
+				(undertone_id, product_id)
+				VALUES ${joinIds};
+			`;
 			await connection.execute(sql);
-
-			// troisième requete : undertones
-			let joinIds = data.undertone_ids
-				?.split(",")
-				.map((value) => `(${value}, @id)`)
-				.join(",");
-
-			console.log("1,2,3", joinIds);
-
-			sql = `
-				INSERT INTO ${process.env.MYSQL_DATABASE}.product_undertone (undertone_id, product_id)
-				VALUES ${joinIds};
-			`;
-			await connection.execute(sql, data);
-
-			// troisième requete : skin colors
-			joinIds = data.skin_color_ids
-				?.split(",")
-				.map((value) => `(${value}, @id)`)
-				.join(",");
-
-			console.log("1,2", joinIds);
-
-			sql = `
-				INSERT INTO ${process.env.MYSQL_DATABASE}.product_skin_color (skin_color_id, product_id)
-				VALUES ${joinIds};
-			`;
-			await connection.execute(sql, data);
-
-			// troisième requete : skin types
-			joinIds = data.skin_type_ids
-				?.split(",")
-				.map((value) => `(${value}, @id)`)
-				.join(",");
-
-			console.log("1,2,3,4", joinIds);
-
-			sql = `
-				INSERT INTO ${process.env.MYSQL_DATABASE}.product_skin_type (skin_type_id, product_id)
-				VALUES ${joinIds};
-			`;
-			await connection.execute(sql, data);
 
 			// valider la transaction SQL
 			await connection.commit();
 
-			// retourner les infos de la requete
 			return query;
 		} catch (error) {
-			// annuler la transaction
 			await connection.rollback();
-
 			return error;
 		}
 	};

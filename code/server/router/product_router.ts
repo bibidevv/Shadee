@@ -14,7 +14,11 @@ class ProductRouter {
 		this.router.get("/", new ProductController().index);
 
 		// POST /api/product et utilisation du middlewear multer
+		// ajout d'un enregistrement
 		this.router.post("/", this.multer.any(), new ProductController().insert);
+
+		// maj d'un enregistrement
+		this.router.put("/", this.multer.any(), new ProductController().update);
 
 		return this.router;
 	};

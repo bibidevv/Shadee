@@ -47,6 +47,30 @@ class ProductController {
 			data: results,
 		});
 	};
+
+	// méthode PUT /api/product
+	public update = async (req: Request, res: Response) => {
+		console.log(req.body);
+
+		const results = await new ProductRepository().update(req.body);
+
+		// gestion d'erreur
+		if (results instanceof Error) {
+			res.status(400).json({
+				status: 400,
+				message:
+					process.env.NODE_ENV === "production" ? "Error" : results.message,
+			});
+			return;
+		}
+
+		// renvoyer la réponse
+		res.status(200).json({
+			status: 200,
+			message: "Updated",
+			data: results,
+		});
+	};
 }
 
 export default ProductController;
