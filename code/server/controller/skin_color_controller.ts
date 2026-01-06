@@ -20,7 +20,7 @@ class Skin_colorController {
 		// renvoyer une réponse avec un code de statut précis HTTP et au format JSON
 		res.status(200).json({
 			status: 200,
-			message: "c'est la couleur",
+			message: "C'est la couleur",
 			data: results,
 		});
 	};

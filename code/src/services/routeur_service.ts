@@ -33,7 +33,12 @@ class RouteurService {
 							{
 								id: "products",
 								path: "products",
-								// lazy: () => import("../pages/products"),
+								lazy: () => import("../pages/products"),
+							},
+							{
+								id: "products-details",
+								path: "product/:id",
+								lazy: () => import("../pages/products_details"),
 							},
 							{
 								id: "login",

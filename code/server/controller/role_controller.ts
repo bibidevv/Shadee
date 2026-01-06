@@ -43,7 +43,7 @@ class RoleController {
 		// renvoyer une réponse avec un code de statut précis HTTP et au format JSON
 		res.status(200).json({
 			status: 200,
-			message: "c'est le role",
+			message: "Voici le role",
 			data: results,
 		});
 	};

@@ -59,13 +59,59 @@ GROUP BY ${this.table}.id;
 		}
 	};
 
+	// sélectionner un enregistrement
+	public selectOne = async (
+		data: Partial<Product>,
+	): Promise<Product | unknown> => {
+		const connection = await new MySQLService().connect();
+
+		const sql = `
+SELECT 
+	${this.table}.*,
+	GROUP_CONCAT(DISTINCT product_undertone.undertone_id) AS undertone_ids,
+	GROUP_CONCAT(DISTINCT product_skin_type.skin_type_id) AS skin_type_ids,
+	GROUP_CONCAT(DISTINCT product_skin_color.skin_color_id) AS skin_color_ids
+FROM ${process.env.MYSQL_DATABASE}.${this.table}
+LEFT JOIN product_undertone
+	ON ${this.table}.id = product_undertone.product_id
+LEFT JOIN product_skin_type
+	ON ${this.table}.id = product_skin_type.product_id
+LEFT JOIN product_skin_color
+	ON ${this.table}.id = product_skin_color.product_id
+	WHERE ${this.table}.id = :id 
+GROUP BY ${this.table}.id;
+		`;
+
+		try {
+			const [query] = await connection.execute(sql, data);
+			// récuperer le premier indice d'un array
+			const result = (query as Product[]).shift() as Product;
+
+			result.undertones = (await new UndertoneRepository().selectInList(
+				result.undertone_ids,
+			)) as Undertone[];
+
+			result.skin_colors = (await new Skin_colorRepository().selectInList(
+				result.skin_color_ids,
+			)) as Skin_color[];
+
+			result.skin_types = (await new Skin_typeRepository().selectInList(
+				result.skin_type_ids,
+			)) as Skin_type[];
+
+			return result;
+		} catch (error) {
+			return error;
+		}
+	};
+
 	// insérer un enregistrement
 	public insert = async (
 		data: Partial<Product>,
 	): Promise<QueryResult | unknown> => {
 		const connection = await new MySQLService().connect();
 
-		const sql = `
+		let sql = `
 			INSERT INTO ${process.env.MYSQL_DATABASE}.${this.table}
 			VALUES (
 				NULL,
@@ -77,9 +123,57 @@ GROUP BY ${this.table}.id;
 		`;
 
 		try {
-			const [query] = await connection.execute(sql, data);
+			// démarrer une transaction sql
+			await connection.beginTransaction();
+
+			// exécuter l'insert principal
+			await connection.execute(sql, data);
+
+			sql = `SET @id = LAST_INSERT_ID();`;
+			await connection.execute(sql);
+
+			let joinIds = data.undertone_ids
+				?.split(",")
+				.map((value) => `(@id, ${value})`)
+				.join(",");
+
+			sql = `
+				INSERT INTO ${process.env.MYSQL_DATABASE}.product_undertone
+				VALUES ${joinIds};
+			`;
+
+			await connection.execute(sql);
+
+			joinIds = data.skin_type_ids
+				?.split(",")
+				.map((value) => `(@id, ${value})`)
+				.join(",");
+
+			sql = `
+				INSERT INTO ${process.env.MYSQL_DATABASE}.product_skin_type
+				VALUES ${joinIds};
+			`;
+
+			await connection.execute(sql);
+
+			joinIds = data.skin_color_ids
+				?.split(",")
+				.map((value) => `(@id, ${value})`)
+				.join(",");
+
+			sql = `
+				INSERT INTO ${process.env.MYSQL_DATABASE}.product_skin_color
+				VALUES ${joinIds};
+			`;
+
+			const [query] = await connection.execute(sql);
+
+			// valider la transaction SQL
+			await connection.commit();
+
 			return query;
 		} catch (error) {
+			await connection.rollback();
 			return error;
 		}
 	};
@@ -118,22 +212,121 @@ GROUP BY ${this.table}.id;
 				product_undertone.product_id = :id
 			;
 			`;
-			const [query] = await connection.execute(sql, data);
-
-			sql = `SET @id = :id;`;
 			await connection.execute(sql, data);
 
-			const joinIds = data.undertone_ids
+			sql = `
+				DELETE FROM
+				${process.env.MYSQL_DATABASE}.product_skin_type
+				WHERE
+				product_skin_type.product_id = :id
+			;
+			`;
+			await connection.execute(sql, data);
+
+			sql = `
+				DELETE FROM
+				${process.env.MYSQL_DATABASE}.product_skin_color
+				WHERE
+				product_skin_color.product_id = :id
+			;
+			`;
+			await connection.execute(sql, data);
+
+			let joinIds = data.undertone_ids
 				?.split(",")
-				.map((value) => `(${value}, @id)`)
+				.map((value) => `(:id, ${value})`)
 				.join(",");
 
 			sql = `
 				INSERT INTO ${process.env.MYSQL_DATABASE}.product_undertone
-				(undertone_id, product_id)
 				VALUES ${joinIds};
 			`;
-			await connection.execute(sql);
+
+			await connection.execute(sql, data);
+
+			joinIds = data.skin_type_ids
+				?.split(",")
+				.map((value) => `(:id, ${value})`)
+				.join(",");
+
+			sql = `
+				INSERT INTO ${process.env.MYSQL_DATABASE}.product_skin_type
+				VALUES ${joinIds};
+			`;
+
+			await connection.execute(sql, data);
+
+			joinIds = data.skin_color_ids
+				?.split(",")
+				.map((value) => `(:id, ${value})`)
+				.join(",");
+
+			sql = `
+				INSERT INTO ${process.env.MYSQL_DATABASE}.product_skin_color
+				VALUES ${joinIds};
+			`;
+
+			const [query] = await connection.execute(sql, data);
+
+			// valider la transaction SQL
+			await connection.commit();
+
+			return query;
+		} catch (error) {
+			await connection.rollback();
+			return error;
+		}
+	};
+
+	// supprimer un enregitrement
+	public delete = async (
+		data: Partial<Product>,
+	): Promise<QueryResult | unknown> => {
+		const connection = await new MySQLService().connect();
+
+		let sql = `
+			DELETE FROM
+				${process.env.MYSQL_DATABASE}.product_undertone
+			WHERE
+				product_undertone.product_id = :id
+			;
+		`;
+
+		try {
+			// démarrer une transaction sql
+			await connection.beginTransaction();
+
+			// exécuter l'update principal
+			await connection.execute(sql, data);
+
+			sql = `
+				DELETE FROM
+				${process.env.MYSQL_DATABASE}.product_skin_type
+				WHERE
+				product_skin_type.product_id = :id
+			;
+			`;
+			await connection.execute(sql, data);
+
+			sql = `
+				DELETE FROM
+				${process.env.MYSQL_DATABASE}.product_skin_color
+				WHERE
+				product_skin_color.product_id = :id
+			;
+			`;
+
+			await connection.execute(sql, data);
+
+			sql = `
+				DELETE FROM
+				${process.env.MYSQL_DATABASE}.${this.table}
+				WHERE
+				${this.table}.id = :id
+			;
+			`;
+
+			const [query] = await connection.execute(sql, data);
 
 			// valider la transaction SQL
 			await connection.commit();
