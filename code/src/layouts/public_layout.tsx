@@ -1,4 +1,5 @@
 import { Outlet } from "react-router";
+import LoginForm from "../components/login_form";
 import NavBar from "../components/navbar";
 
 // import NavBar from "../components/navbar";

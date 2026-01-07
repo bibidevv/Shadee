@@ -20,7 +20,9 @@ const NavBar = () => {
 
 			{/* Menu desktop / mobile */}
 			<nav
-				className={`${styles.menu} ${navMobileIsVisible ? styles.menuVisible : ""}`}
+				className={`${styles.menu} ${
+					navMobileIsVisible ? styles.menuVisible : ""
+				}`}
 			>
 				<NavLink
 					to="/"
@@ -28,17 +30,35 @@ const NavBar = () => {
 				>
 					Accueil
 				</NavLink>
+
 				<NavLink
 					to="/products"
 					className={({ isActive }) => (isActive ? styles.active : "")}
 				>
 					Products
 				</NavLink>
+
 				<NavLink
 					to="/contact"
 					className={({ isActive }) => (isActive ? styles.active : "")}
 				>
 					Contact
+				</NavLink>
+
+				{/* Lien login */}
+				<NavLink
+					to="/login"
+					className={({ isActive }) => (isActive ? styles.active : "")}
+				>
+					Se connecter
+				</NavLink>
+
+				{/* 🔹 Nouveau lien register */}
+				<NavLink
+					to="/register"
+					className={({ isActive }) => (isActive ? styles.active : "")}
+				>
+					S'inscrire
 				</NavLink>
 			</nav>
 

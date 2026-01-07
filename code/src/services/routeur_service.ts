@@ -29,7 +29,7 @@ class RouteurService {
 								path: "contact",
 								lazy: () => import("../pages/contact"),
 							},
-							// 👉 Ajouts ici
+
 							{
 								id: "products",
 								path: "products",
@@ -43,7 +43,25 @@ class RouteurService {
 							{
 								id: "login",
 								path: "login",
-								// lazy: () => import("../pages/login"),
+								lazy: () => import("../pages/login"),
+							},
+							{
+								id: "register",
+								path: "register",
+								lazy: () => import("../pages/register"),
+							},
+							{
+								id: "admin",
+								path: "admin",
+								lazy: () => import("../layouts/admin_layout"),
+								children: [
+									{
+										id: "admin-home",
+										index: true,
+										path: "",
+										lazy: () => import("../pages/admin_page"),
+									},
+								],
 							},
 						],
 					},
