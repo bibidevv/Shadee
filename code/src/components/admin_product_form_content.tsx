@@ -6,6 +6,7 @@ import { date } from "zod";
 import type { ZodIssue } from "zod/v3";
 import type { Product } from "../../models/product";
 import type { AdminProductsForm_props } from "../models/props/admin_products_form_props";
+import ProductApiService from "../services/product_api_service";
 
 /*
 react hook form
@@ -39,15 +40,18 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 
 	const submitForm = async (data: Partial<Product>) => {
 		// normaliser les données saisies : se baser sur les données testées dans flashpost pour que les données marchent
+		console.log(data);
 
 		const normalizedData = {
-			...date,
-			product_ids: (data.product_ids as unknow as string[]).join(),
+			...data,
+			undertone_ids: (data.undertone_ids as unknown as string[]).join(),
+			skin_type_ids: (data.skin_type_ids as unknown as string[]).join(),
+			skin_color_ids: (data.skin_color_ids as unknown as string[]).join(),
 		};
-		console.log(validator);
 
 		// validation de la saisie avec le validateur côté serveur
 		const validation = await validator(normalizedData);
+
 		// si la validation échoue
 		if (validation instanceof Error) {
 			// 	// stocker les messages d'erreur
@@ -58,9 +62,29 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 				errors = { ...errors, [item.path.shift() as string]: item.message };
 				return errors;
 			});
+			// définir l'état affichant les messages d'erreur coé serveur
 			setServerErrors(errors);
+			// stopprt l'execution du scrpit
 			return;
 		}
+
+		// si la validation réussie
+		// si le formulaire contient un champ de fichier : envoyer vers l'api un objet de type formData
+		const formData = new FormData();
+		// reprendre strictement le nom du champ de formulaire testé avec flashpost
+		formData.set("id", normalizedData.id as unknown as string);
+		formData.set("name", normalizedData.name as string);
+		formData.set("price", normalizedData.price as unknown as string);
+		formData.set("description", normalizedData.description as string);
+		formData.set("image", normalizedData.image as string);
+		formData.set("undertone_ids", normalizedData.undertone_ids as string);
+		formData.set("skin_type_ids", normalizedData.skin_type_ids as string);
+		formData.set("skin_color_ids", normalizedData.skin_color_ids as string);
+
+		// requête HTT vers l'API
+		const process = await new ProductApiService().insert(formData);
+
+		console.log(process);
 	};
 
 	return (
@@ -77,11 +101,7 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 						maxLength: { value: 100, message: "100 caractères maximum" },
 					})}
 				/>
-				{errors.name && (
-					<small role="alert">
-						{errors.name.message ?? serverErrors?.name}
-					</small>
-				)}
+				<small role="alert">{errors.name?.message ?? serverErrors?.name}</small>
 			</div>
 
 			{/* Prix */}
@@ -95,11 +115,9 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 						// min: { value: 0, message: "Le prix doit être positif" },
 					})}
 				/>
-				{errors.name && (
-					<small role="alert">
-						{errors.number.message ?? serverErrors?.name}
-					</small>
-				)}
+				<small role="alert">
+					{errors.price?.message ?? serverErrors?.price}
+				</small>
 			</div>
 
 			{/* Description */}
@@ -112,11 +130,9 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 						minLength: { value: 10, message: "10 caractères minimum" },
 					})}
 				/>
-				{errors.description && errors.name && (
-					<small role="alert">
-						{errors.description?.message ?? serverErrors?.name}
-					</small>
-				)}
+				<small role="alert">
+					{errors.description?.message ?? serverErrors?.name}
+				</small>
 			</div>
 
 			{/* Couleurs de peau - select multiple */}
@@ -129,14 +145,12 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 						required: "Sélectionnez au moins une couleur",
 					})}
 				>
-					<option value="CLEAR WHITE">CLEAR WHITE</option>
-					<option value="DARK SKINED">DARK SKINED</option>
+					<option value="1">CLEAR WHITE</option>
+					<option value="2">DARK SKINED</option>
 				</select>
-				{errors.skin_color_ids && errors.name && (
-					<small role="alert">
-						{errors.skin_color_ids.message ?? serverErrors?.name}
-					</small>
-				)}
+				<small role="alert">
+					{errors.skin_color_ids?.message ?? serverErrors?.name}
+				</small>
 			</div>
 
 			{/* Sous-ton - select simple */}
@@ -152,22 +166,62 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 					/>
 					<label htmlFor="">Neutre</label>
 				</p>
-				{/* <select
-					id={undertoneID}
-					{...register("undertone_ids", {
-						required: "Le sous-ton est obligatoire",
+				<p>
+					<input
+						type="checkbox"
+						{...register("undertone_ids", {
+							required: "Le sous-ton est obligatoire",
+						})}
+						value="2"
+					/>
+					<label htmlFor="">Chaud</label>
+				</p>
+				<small role="alert">
+					{errors.undertone_ids?.message ?? serverErrors?.undertone_ids}
+				</small>
+			</div>
+
+			<div>
+				<label htmlFor={skinTypeID}>types</label>
+				<p>
+					<input
+						type="checkbox"
+						{...register("skin_type_ids", {
+							required: "Le type est obligatoire",
+						})}
+						value="1"
+					/>
+					<label htmlFor="">Gras</label>
+				</p>
+				<p>
+					<input
+						type="checkbox"
+						{...register("skin_type_ids", {
+							required: "Le type est obligatoire",
+						})}
+						value="2"
+					/>
+					<label htmlFor="">Mixte</label>
+				</p>
+				<small role="alert">
+					{errors.skin_type_ids?.message ?? serverErrors?.skin_type_ids}
+				</small>
+			</div>
+
+			<div>
+				<label htmlFor={imageID}>image</label>
+				<input
+					id={imageID}
+					type="text"
+					{...register("image", {
+						// required: "Le prix est obligatoire",
+						// min: { value: 0, message: "Le prix doit être positif" },
 					})}
-				>
-					<option value="">-- Choisir --</option>
-					<option value="NEUTRAL">Neutre</option>
-					<option value="WARM">Chaud</option>
-					<option value="COOL">Froid</option>
-				</select> */}
-				{errors.undertone_ids && errors.name && (
-					<small role="alert">
-						{errors.undertone_ids.message ?? serverErrors?.name}
-					</small>
-				)}
+				/>
+
+				<small role="alert">
+					{errors.image?.message ?? serverErrors?.image}
+				</small>
 			</div>
 
 			{/* Types de peau - select multiple */}
@@ -201,12 +255,7 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 				errors.name && <small role="alert">{errors.image.message ?? serverErrors?.name}</small>
 			</div> */}
 
-			{/* Erreur product_ids */}
-			{errors.name && (
-				<small role="alert">
-					{errors.product_ids.message ?? serverErrors?.name}
-				</small>
-			)}
+			<input type="hidden" {...register("id")} />
 
 			<button type="submit">Soumettre</button>
 		</form>

@@ -20,7 +20,7 @@ class Skin_typeController {
 		// renvoyer une réponse avec un code de statut précis HTTP et au format JSON
 		res.status(200).json({
 			status: 200,
-			message: "role:",
+			message: "Type de peau :",
 			data: results,
 		});
 	};

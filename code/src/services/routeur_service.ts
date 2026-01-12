@@ -66,15 +66,11 @@ class RouteurService {
 										path: "products",
 										lazy: () => import("../pages/admin_products_page"),
 									},
-									{
-										id: "admin-products-form",
-										path: "products/form",
-										lazy: () => import("../pages/form"),
-									},
+
 									{
 										id: "admin-products-add",
 										path: "products/add",
-										lazy: () => import("../components/admin_products_add"),
+										lazy: () => import("../pages/admin_products_form"),
 									},
 								],
 							},

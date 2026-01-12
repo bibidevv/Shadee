@@ -1,3 +1,4 @@
+import cors from "cors";
 import express, { type Router } from "express";
 import HomepageRouter from "../router/homepage_router";
 import ProductRouter from "../router/product_router";
@@ -13,11 +14,15 @@ class Server {
 	private router: Router = express.Router();
 
 	constructor() {
-		// relier le routeur à l'application
-
 		// intégrer le middleware express json qui permet de récupérer la propriété body de la requete http en json
-
 		this.app.use(express.json());
+
+		// intégrer le middleware CORS - Cross Origin Ressource Sharing-
+		this.app.use(
+			cors({
+				origin: process.env.ORIGINS?.split(","),
+			}),
+		);
 
 		// relier le routeur à l'application
 		this.app.use(this.router);

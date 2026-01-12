@@ -1,7 +1,7 @@
 import { use } from "react";
 import type { Product } from "../../models/product";
 import type { ApiResponse } from "../models/props/api_response";
-import ProductApiService from "../models/props/product_api_service";
+import ProductApiService from "../services/product_api_service";
 import ProductListItem from "./Product_list_item";
 
 const Products_list = () => {

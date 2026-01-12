@@ -5,7 +5,7 @@ class Skin_typeRepository {
 	// nom de la table sql
 	private table = "skin_type";
 
-	// sélectionner tous les enregistrements
+	// sélectionner tous les enregistrements d'une list
 	public selectInList = async (
 		list: string,
 	): Promise<Skin_type[] | unknown> => {
@@ -29,6 +29,28 @@ class Skin_typeRepository {
 			return error;
 		}
 	};
+
+	// sélectionner tous les enregistrements
+	public selectAll = async (): Promise<Skin_type[] | unknown> => {
+		// connexion au serveur mysql
+		const connection = await new MySQLService().connect();
+
+		// requête SQL
+		//SELECT menu.* FROM shadee_dev.menu;
+		const sql = `
+        SELECT ${this.table}.*
+        FROM ${process.env.MYSQL_DATABASE}.${this.table};  
+        `;
+		// try / catch : récuperer els résultats de la requete ou une erreur
+		try {
+			const [query] = await connection.execute(sql);
+
+			return query;
+		} catch (error) {
+			return error;
+		}
+	};
+
 	// sélectionner un enreigistrement
 	public selectOne = async (
 		data: Partial<Skin_type>,
