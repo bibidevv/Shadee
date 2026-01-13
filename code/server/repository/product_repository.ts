@@ -41,15 +41,15 @@ GROUP BY ${this.table}.id;
 				const result = products[i];
 
 				result.undertones = (await new UndertoneRepository().selectInList(
-					result.undertone_ids,
+					result.undertone_ids as string,
 				)) as Undertone[];
 
 				result.skin_colors = (await new Skin_colorRepository().selectInList(
-					result.skin_color_ids,
+					result.skin_color_ids as string,
 				)) as Skin_color[];
 
 				result.skin_types = (await new Skin_typeRepository().selectInList(
-					result.skin_type_ids,
+					result.skin_type_ids as string,
 				)) as Skin_type[];
 			}
 
@@ -88,15 +88,15 @@ GROUP BY ${this.table}.id;
 			const result = (query as Product[]).shift() as Product;
 
 			result.undertones = (await new UndertoneRepository().selectInList(
-				result.undertone_ids,
+				result.undertone_ids as string,
 			)) as Undertone[];
 
 			result.skin_colors = (await new Skin_colorRepository().selectInList(
-				result.skin_color_ids,
+				result.skin_color_ids as string,
 			)) as Skin_color[];
 
 			result.skin_types = (await new Skin_typeRepository().selectInList(
-				result.skin_type_ids,
+				result.skin_type_ids as string,
 			)) as Skin_type[];
 
 			return result;
@@ -132,7 +132,7 @@ GROUP BY ${this.table}.id;
 			sql = `SET @id = LAST_INSERT_ID();`;
 			await connection.execute(sql);
 
-			let joinIds = data.undertone_ids
+			let joinIds = (data.undertone_ids as string)
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join(",");
@@ -144,7 +144,7 @@ GROUP BY ${this.table}.id;
 
 			await connection.execute(sql);
 
-			joinIds = data.skin_type_ids
+			joinIds = (data.skin_type_ids as string)
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join(",");
@@ -156,7 +156,7 @@ GROUP BY ${this.table}.id;
 
 			await connection.execute(sql);
 
-			joinIds = data.skin_color_ids
+			joinIds = (data.skin_color_ids as string)
 				?.split(",")
 				.map((value) => `(@id, ${value})`)
 				.join(",");
@@ -232,7 +232,7 @@ GROUP BY ${this.table}.id;
 			`;
 			await connection.execute(sql, data);
 
-			let joinIds = data.undertone_ids
+			let joinIds = (data.undertone_ids as string)
 				?.split(",")
 				.map((value) => `(:id, ${value})`)
 				.join(",");
@@ -244,7 +244,7 @@ GROUP BY ${this.table}.id;
 
 			await connection.execute(sql, data);
 
-			joinIds = data.skin_type_ids
+			joinIds = (data.skin_type_ids as string)
 				?.split(",")
 				.map((value) => `(:id, ${value})`)
 				.join(",");
@@ -256,7 +256,7 @@ GROUP BY ${this.table}.id;
 
 			await connection.execute(sql, data);
 
-			joinIds = data.skin_color_ids
+			joinIds = (data.skin_color_ids as string)
 				?.split(",")
 				.map((value) => `(:id, ${value})`)
 				.join(",");

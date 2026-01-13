@@ -64,12 +64,13 @@ class RouteurService {
 									{
 										id: "admin-products",
 										path: "products",
-										lazy: () => import("../pages/admin_products_page"),
+										lazy: () => import("../pages/admin_products_homepage"),
 									},
 
 									{
 										id: "admin-products-add",
-										path: "products/add",
+										path: "products/add/:id?",
+										// variable d'url optionnelle est sufixée d'un ?
 										lazy: () => import("../pages/admin_products_form"),
 									},
 								],

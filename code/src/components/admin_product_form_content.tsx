@@ -1,28 +1,43 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { date } from "zod";
 import type { ZodIssue } from "zod/v3";
 import type { Product } from "../../models/product";
 import type { AdminProductsForm_props } from "../models/props/admin_products_form_props";
 import ProductApiService from "../services/product_api_service";
 
-/*
+const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
+	/*
 react hook form
 - register : remplacer l'attribut name, permet de référencer le champ de saisie lors de la soumission du formulaire
 - handleSubmit: permet de gérer la soumission du formulaire
 - reset : permet de pré-remplir le formulaire avec des données
 - errors : récupérer les erreurs de saisie
-*/
-
-const ProductForm = ({ validator }: AdminProductsForm_props) => {
-	const {
+*/ const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors },
 	} = useForm<Partial<Product>>();
+
+	// préremplir le formulaire avant l'affichage du composant
+	useEffect(() => {
+		// si des données sont à méttre à jour
+		if (dataToUpdate) {
+			// normaliser les données saisies : se baser sur les données testées dans flashpost pour que les données marchent
+
+			const normalizedData = {
+				...dataToUpdate,
+				undertone_ids: (dataToUpdate.undertone_ids as string).split(","),
+				skin_type_ids: (dataToUpdate.skin_type_ids as string).split(","),
+				skin_color_ids: (dataToUpdate.skin_color_ids as string).split(","),
+			};
+			reset(normalizedData);
+		}
+	}, [dataToUpdate, reset]);
 
 	// console.log(validator);
 
@@ -35,12 +50,16 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 	const skinTypeID = useId();
 	const imageID = useId();
 
+	// useNavigate permet de créer une redirection
+	const navigate = useNavigate();
 	// stocker les messages d'erreur de validation coté serveur
 	const [serverErrors, setServerErrors] = useState<Partial<Product>>();
 
+	// message lié à la soumission du formulaire
+	const [message, setMessage] = useState<string>("");
+
 	const submitForm = async (data: Partial<Product>) => {
 		// normaliser les données saisies : se baser sur les données testées dans flashpost pour que les données marchent
-		console.log(data);
 
 		const normalizedData = {
 			...data,
@@ -81,184 +100,163 @@ const ProductForm = ({ validator }: AdminProductsForm_props) => {
 		formData.set("skin_type_ids", normalizedData.skin_type_ids as string);
 		formData.set("skin_color_ids", normalizedData.skin_color_ids as string);
 
-		// requête HTT vers l'API
-		const process = await new ProductApiService().insert(formData);
+		// requête HTTP vers l'API
+		const process = dataToUpdate
+			? await new ProductApiService().update(formData)
+			: await new ProductApiService().insert(formData);
 
-		console.log(process);
+		// si la requête HTTP a réussie
+		if ([200, 201].indexOf(process.status) !== -1) {
+			// redirection
+			navigate("/admin/products");
+		}
+
+		// si la requête HTTP échoue
+		else if ([400].indexOf(process.status) !== -1) {
+			// afficher un message
+			setMessage(process.data as unknown as string);
+		}
 	};
 
 	return (
-		<form onSubmit={handleSubmit(submitForm)} encType="multipart/form-data">
-			{/* Nom */}
-			<div>
-				<label htmlFor={nameID}>Nom du produit</label>
-				<input
-					id={nameID}
-					type="text"
-					{...register("name", {
-						required: "Le nom est obligatoire",
-						minLength: { value: 5, message: "5 caractères minimum" },
-						maxLength: { value: 100, message: "100 caractères maximum" },
-					})}
-				/>
-				<small role="alert">{errors.name?.message ?? serverErrors?.name}</small>
-			</div>
-
-			{/* Prix */}
-			<div>
-				<label htmlFor={priceID}>Prix</label>
-				<input
-					id={priceID}
-					type="number"
-					{...register("price", {
-						// required: "Le prix est obligatoire",
-						// min: { value: 0, message: "Le prix doit être positif" },
-					})}
-				/>
-				<small role="alert">
-					{errors.price?.message ?? serverErrors?.price}
-				</small>
-			</div>
-
-			{/* Description */}
-			<div>
-				<label htmlFor={descriptionID}>Description</label>
-				<textarea
-					id={descriptionID}
-					{...register("description", {
-						required: "La description est obligatoire",
-						minLength: { value: 10, message: "10 caractères minimum" },
-					})}
-				/>
-				<small role="alert">
-					{errors.description?.message ?? serverErrors?.name}
-				</small>
-			</div>
-
-			{/* Couleurs de peau - select multiple */}
-			<div>
-				<label htmlFor={skinColorID}>Couleurs de peau</label>
-				<select
-					id={skinColorID}
-					multiple
-					{...register("skin_color_ids", {
-						required: "Sélectionnez au moins une couleur",
-					})}
-				>
-					<option value="1">CLEAR WHITE</option>
-					<option value="2">DARK SKINED</option>
-				</select>
-				<small role="alert">
-					{errors.skin_color_ids?.message ?? serverErrors?.name}
-				</small>
-			</div>
-
-			{/* Sous-ton - select simple */}
-			<div>
-				<label htmlFor={undertoneID}>Sous-ton</label>
-				<p>
+		<>
+			message ? <p role="alert">{message}</p> :
+			<form onSubmit={handleSubmit(submitForm)} encType="multipart/form-data">
+				{/* Nom */}
+				<div>
+					<label htmlFor={nameID}>Nom du produit</label>
 					<input
-						type="checkbox"
-						{...register("undertone_ids", {
-							required: "Le sous-ton est obligatoire",
+						id={nameID}
+						type="text"
+						{...register("name", {
+							required: "Le nom est obligatoire",
+							minLength: { value: 5, message: "5 caractères minimum" },
+							maxLength: { value: 100, message: "100 caractères maximum" },
 						})}
-						value="1"
 					/>
-					<label htmlFor="">Neutre</label>
-				</p>
-				<p>
+					<small role="alert">
+						{errors.name?.message ?? serverErrors?.name}
+					</small>
+				</div>
+
+				{/* Prix */}
+				<div>
+					<label htmlFor={priceID}>Prix</label>
 					<input
-						type="checkbox"
-						{...register("undertone_ids", {
-							required: "Le sous-ton est obligatoire",
+						id={priceID}
+						type="number"
+						{...register("price", {
+							// required: "Le prix est obligatoire",
+							// min: { value: 0, message: "Le prix doit être positif" },
 						})}
-						value="2"
 					/>
-					<label htmlFor="">Chaud</label>
-				</p>
-				<small role="alert">
-					{errors.undertone_ids?.message ?? serverErrors?.undertone_ids}
-				</small>
-			</div>
+					<small role="alert">
+						{errors.price?.message ?? serverErrors?.price}
+					</small>
+				</div>
 
-			<div>
-				<label htmlFor={skinTypeID}>types</label>
-				<p>
-					<input
-						type="checkbox"
-						{...register("skin_type_ids", {
-							required: "Le type est obligatoire",
+				{/* Description */}
+				<div>
+					<label htmlFor={descriptionID}>Description</label>
+					<textarea
+						id={descriptionID}
+						{...register("description", {
+							required: "La description est obligatoire",
+							minLength: { value: 10, message: "10 caractères minimum" },
 						})}
-						value="1"
 					/>
-					<label htmlFor="">Gras</label>
-				</p>
-				<p>
-					<input
-						type="checkbox"
-						{...register("skin_type_ids", {
-							required: "Le type est obligatoire",
+					<small role="alert">
+						{errors.description?.message ?? serverErrors?.name}
+					</small>
+				</div>
+
+				{/* Couleurs de peau - select multiple */}
+				<div>
+					<label htmlFor={skinColorID}>Couleurs de peau</label>
+					<select
+						id={skinColorID}
+						multiple
+						{...register("skin_color_ids", {
+							required: "Sélectionnez au moins une couleur",
 						})}
-						value="2"
-					/>
-					<label htmlFor="">Mixte</label>
-				</p>
-				<small role="alert">
-					{errors.skin_type_ids?.message ?? serverErrors?.skin_type_ids}
-				</small>
-			</div>
+					>
+						<option value="1">CLEAR WHITE</option>
+						<option value="2">DARK SKINED</option>
+					</select>
+					<small role="alert">
+						{errors.skin_color_ids?.message ?? serverErrors?.name}
+					</small>
+				</div>
 
-			<div>
-				<label htmlFor={imageID}>image</label>
-				<input
-					id={imageID}
-					type="text"
-					{...register("image", {
-						// required: "Le prix est obligatoire",
-						// min: { value: 0, message: "Le prix doit être positif" },
-					})}
-				/>
+				{/* Sous-ton - select simple */}
+				<div>
+					<label htmlFor={undertoneID}>Sous-ton</label>
+					<p>
+						<input
+							type="checkbox"
+							{...register("undertone_ids", {
+								required: "Le sous-ton est obligatoire",
+							})}
+							value="1"
+						/>
+						<label htmlFor="">Neutre</label>
+					</p>
+					<p>
+						<input
+							type="checkbox"
+							{...register("undertone_ids", {
+								required: "Le sous-ton est obligatoire",
+							})}
+							value="2"
+						/>
+						<label htmlFor="">Chaud</label>
+					</p>
+					<small role="alert">
+						{errors.undertone_ids?.message ?? serverErrors?.undertone_ids}
+					</small>
+				</div>
 
-				<small role="alert">
-					{errors.image?.message ?? serverErrors?.image}
-				</small>
-			</div>
+				<div>
+					<label htmlFor={skinTypeID}>types</label>
+					<p>
+						<input
+							type="checkbox"
+							{...register("skin_type_ids", {
+								required: "Le type est obligatoire",
+							})}
+							value="1"
+						/>
+						<label htmlFor="">Gras</label>
+					</p>
+					<p>
+						<input
+							type="checkbox"
+							{...register("skin_type_ids", {
+								required: "Le type est obligatoire",
+							})}
+							value="2"
+						/>
+						<label htmlFor="">Mixte</label>
+					</p>
+					<small role="alert">
+						{errors.skin_type_ids?.message ?? serverErrors?.skin_type_ids}
+					</small>
+				</div>
 
-			{/* Types de peau - select multiple */}
-			{/* <div>
-				<label htmlFor={skinTypeID}>Types de peau</label>
-				<select
-					id={skinTypeID}
-					multiple
-					{...register("skinTypes", {
-						required: "Sélectionnez au moins un type",
-					})}
-				>
-					<option value="NORMAL">Normale</option>
-					<option value="DRY">Sèche</option>
-					<option value="COMBO">Mixte</option>
-					<option value="OILY">Grasse</option>
-				</select>
-				{errors.skinTypes && (
-					errors.name && <small role="alert">{errors.skinTypes.message ?? serverErrors?.name}</small>
-				)}
-			</div> */}
+				<div>
+					<label htmlFor={imageID}>image</label>
+					<input id={imageID} type="text" {...register("image", {})} />
 
-			{/* Image */}
-			{/* <div>
-				<label htmlFor={imageID}>Image (URL ou nom de fichier)</label>
-				<input
-					id={imageID}
-					type="text"
-					{...register("image", { required: "L'image est obligatoire" })}
-				/>
-				errors.name && <small role="alert">{errors.image.message ?? serverErrors?.name}</small>
-			</div> */}
+					<small role="alert">
+						{errors.image?.message ?? serverErrors?.image}
+					</small>
+				</div>
 
-			<input type="hidden" {...register("id")} />
+				<input type="hidden" {...register("id")} />
 
-			<button type="submit">Soumettre</button>
-		</form>
+				<button type="submit">Soumettre</button>
+			</form>
+		</>
 	);
 };
 

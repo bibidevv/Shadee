@@ -11,13 +11,13 @@ type Product = {
 
 	// liste concaténée des identifiants FK
 
-	undertone_ids: string;
+	undertone_ids: string | string[];
 	undertones: Undertone[];
 
-	skin_color_ids: string;
+	skin_color_ids: string | string[];
 	skin_colors: Skin_color[];
 
-	skin_type_ids: string;
+	skin_type_ids: string | string[];
 	skin_types: Skin_type[];
 };
 
