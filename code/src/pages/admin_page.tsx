@@ -14,11 +14,6 @@ const AdminPage = () => {
 				<Link to="/admin/products">
 					<button type="button">Gérer les produits</button>
 				</Link>
-
-				{/* Plus tard */}
-				{/* <Link to="/admin/users">
-					<button type="button">Gérer les utilisateurs</button>
-				</Link> */}
 			</div>
 		</>
 	);

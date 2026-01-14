@@ -2,10 +2,8 @@ import React, { use } from "react";
 import { Link } from "react-router";
 import ProductApiService from "../services/product_api_service";
 
-const Admin_product_homepage_content = () => {
+const AdminProductHomepageContent = () => {
 	const products = use(new ProductApiService().selectAll()).data;
-
-	// console.log(products);
 
 	return (
 		<div>
@@ -17,7 +15,7 @@ const Admin_product_homepage_content = () => {
 						<p>{item.name}</p>
 						<p>
 							<Link to={`/admin/products/add/${item.id}`}>Modifier</Link>
-							<Link to={``}>Supprimer</Link>
+							<Link to={`/admin/products/delete/${item.id}`}>Supprimer</Link>
 						</p>
 					</div>
 				);
@@ -26,4 +24,4 @@ const Admin_product_homepage_content = () => {
 	);
 };
 
-export default Admin_product_homepage_content;
+export default AdminProductHomepageContent;

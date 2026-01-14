@@ -73,6 +73,11 @@ class RouteurService {
 										// variable d'url optionnelle est sufixée d'un ?
 										lazy: () => import("../pages/admin_products_form"),
 									},
+									{
+										id: "admin-products-delete",
+										path: "products/delete/:id",
+										lazy: () => import("../pages/admin_products_delete"),
+									},
 								],
 							},
 						],

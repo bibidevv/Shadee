@@ -69,7 +69,7 @@ class ProductApiService {
 		return results;
 	};
 
-	public update = async (data: FormData): Promise<ApiResponse<Product>> => {
+	public update = async (data: FormData): Promise<ApiResponse<null>> => {
 		// configurer la requête HTTP
 		const request = new Request(
 			`${import.meta.env.VITE_API_URL}${this.prefix}`,
@@ -90,6 +90,30 @@ class ProductApiService {
 		const results = await response.json();
 
 		// retourner les résultats
+		return results;
+	};
+
+	// suppression d'un enregistrement
+	public delete = async (
+		data: Partial<Product>,
+	): Promise<ApiResponse<null>> => {
+		// configurer la requête HTTP
+		const request = new Request(
+			`${import.meta.env.VITE_API_URL}${this.prefix}`,
+			{
+				method: "delete",
+				headers: {
+					"Content-Type": "application/json",
+				},
+
+				// sérialiser et désérialiser
+
+				body: JSON.stringify(data),
+			},
+		);
+
+		const response = await fetch(request);
+		const results = await response.json();
 		return results;
 	};
 }
