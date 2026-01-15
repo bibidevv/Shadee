@@ -66,6 +66,7 @@ react hook form
 			undertone_ids: (data.undertone_ids as unknown as string[]).join(),
 			skin_type_ids: (data.skin_type_ids as unknown as string[]).join(),
 			skin_color_ids: (data.skin_color_ids as unknown as string[]).join(),
+			image: (data.image as string)[0],
 		};
 
 		// validation de la saisie avec le validateur côté serveur
@@ -245,7 +246,18 @@ react hook form
 
 				<div>
 					<label htmlFor={imageID}>image</label>
-					<input id={imageID} type="text" {...register("image", {})} />
+					<input
+						id={imageID}
+						type="file"
+						{...register(
+							"image",
+							dataToUpdate
+								? {}
+								: {
+										required: "L'image est obligatoire",
+									},
+						)}
+					/>
 
 					<small role="alert">
 						{errors.image?.message ?? serverErrors?.image}

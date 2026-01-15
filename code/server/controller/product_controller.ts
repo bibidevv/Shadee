@@ -1,5 +1,9 @@
+import { log } from "node:console";
 import type { Request, Response } from "express";
+import type { SiExpress } from "react-icons/si";
+import type { Product } from "../../models/product";
 import ProductRepository from "../repository/product_repository";
+import FileService from "../service/file_service";
 
 class ProductController {
 	// méthode GET /api/product
@@ -52,9 +56,22 @@ class ProductController {
 
 	// méthode POST /api/product
 	public insert = async (req: Request, res: Response) => {
-		console.log(req.body);
+		// req files permet de récuperer les fichiers transférés
+		const file = (
+			req.files as Express.Multer.File[]
+		).shift() as Express.Multer.File;
+		// instancier le service de fichiers
+		const fileService = new FileService();
 
-		const results = await new ProductRepository().insert(req.body);
+		// renommer le fichier transféré et récupérer le nom complet
+		const fullname = await fileService.rename(file);
+
+		console.log(req.files);
+
+		const results = await new ProductRepository().insert({
+			...req.body,
+			image: fullname,
+		});
 
 		// gestion d'erreur
 		if (results instanceof Error) {
@@ -76,9 +93,27 @@ class ProductController {
 
 	// méthode PUT /api/product
 	public update = async (req: Request, res: Response) => {
-		console.log(req.body);
+		const file = (
+			req.files as Express.Multer.File[]
+		).shift() as Express.Multer.File;
+		// instancier le service de fichiers
+		const fileService = new FileService();
 
-		const results = await new ProductRepository().update(req.body);
+		let fullname: string;
+		if (file) {
+			// renommer le fichier transféré et récupérer le nom complet avec extension
+
+			fullname = await fileService.rename(file);
+		} else {
+			fullname = (
+				(await new ProductRepository().selectOne(req.body)) as Product
+			).image;
+		}
+
+		const results = await new ProductRepository().update({
+			...req.body,
+			image: fullname,
+		});
 
 		// gestion d'erreur
 		if (results instanceof Error) {

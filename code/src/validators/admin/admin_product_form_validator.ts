@@ -21,7 +21,10 @@ class AdminProductFormValidator {
 			// skin_color_ids: z.string(), // couleurs de peau (sélection multiple)
 			// undertone_ids: z.string(), // sous-ton (sélection simple)
 			// skin_type_ids: z.string(), // types de peau (sélection multiple)
-			image: z.string(), // image (juste une chaîne)
+			image: z.union([
+				z.string().nullable(),
+				z.file("L'image est obligatoire"), // image (juste une chaîne)
+			]),
 		});
 
 		// validation de la saisir du formulaire

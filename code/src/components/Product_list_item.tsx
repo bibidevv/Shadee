@@ -55,7 +55,7 @@ const ProductListItem = ({ data }: ProductListItemProps) => {
 				Convient aux sous tons : {data.undertone}
 			</p> */}
 
-			<img src={data.image} alt={data.name} />
+			<img src={`/images/${data.image}`} alt={data.name} />
 		</article>
 	);
 };
