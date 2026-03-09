@@ -1,59 +1,158 @@
+/* MAIN CONTAINER */
+
 .container {
-	position: relative;
-	width: 100%;
-	max-width: 430px;
-	min-height: 932px;
-	margin: 0 auto;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 60px 20px;
+	gap: 120px;
 	background-color: var(--color-background);
 }
 
+/* SECTION HERO */
+
 .mainContent {
-	position: relative;
-	padding: 100px 0px 50px 0px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	text-align: center;
+	max-width: 800px;
+	gap: 12px; /* réduit les espaces verticaux */
+	padding: 20px 10px; /* moins d’espace autour */
 }
+
+/* TITRE */
 
 .title {
-	font-family: var(--font-title);
-	font-size: 32px;
-	line-height: 140%;
 	color: var(--color-title);
-	margin-bottom: 40px;
+	line-height: 1.2;
 }
 
-/* main image */
+/* IMAGE */
 
 .image {
 	width: 100%;
-	max-width: 430px;
-	height: auto;
-	margin-bottom: 40px;
+	max-width: 500px; /* limite la taille sur grand écran */
+	height: auto; /* garde les proportions */
+	border-radius: 16px; /* optionnel : coins arrondis pour style */
+	object-fit: cover; /* l'image remplit bien son cadre */
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* petite ombre subtile */
+	margin: 0 auto; /* centre l'image horizontalement */
 }
+
+/* SOUS TITRE */
 
 .subtitle {
-	font-family: var(--font-regular);
-	font-size: 20px;
-	line-height: 28px;
-	color: #9c6644;
-	margin-bottom: 30px;
+	color: var(--color-subtitle);
 }
 
+/* BOUTON HERO */
+
 .button {
-	display: block;
-	margin: 0 auto 30px auto;
-	width: 211px;
-	height: 47px;
-	background-color: var(--color-subtitle);
+	margin-top: 10px;
+	padding: 10px 24px;
+	border-radius: 999px;
 	border: none;
-	border-radius: 9999px;
-	font-family: var(--font-title);
-	font-size: 12px;
-	line-height: 14px;
+
+	background-color: var(--color-subtitle);
 	color: var(--color-button-text);
+
 	cursor: pointer;
-	transition: background-color 0.3s ease;
+	transition: all 0.2s ease;
 }
 
 .button:hover {
-	background-color: #ddb892;
+	background-color: var(--color-title);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* SECTION FEATURES */
+
+.featuresSection {
+	width: 100%;
+	max-width: 1000px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 20px;
+}
+
+/* TITRE SECTION */
+
+.featuresTitle {
+	color: var(--color-title);
+	max-width: 700px;
+	line-height: 1.3;
+}
+
+.featuresGrid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 25px;
+	width: 100%;
+}
+
+/* CARTES */
+
+.featureCard {
+	background: white;
+	padding: 25px 20px;
+
+	border-radius: 16px;
+
+	/* Contour léger */
+	border: 1px solid rgba(0, 0, 0, 0.08);
+
+	/* Ombre douce */
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.featureCard:hover {
+	transform: translateY(-5px);
+	/* Ombre un peu plus prononcée au hover */
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.icon {
+	font-size: 22px;
+	color: var(--color-icon);
+}
+
+.signupButton {
+	margin-top: 20px;
+	padding: 12px 28px;
+
+	border-radius: 999px;
+	border: none;
+
+	background-color: var(--color-subtitle);
+	color: var(--color-button-text);
+
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.signupButton:hover {
+	background-color: var(--color-title);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 800px) {
+	.featuresGrid {
+		grid-template-columns: 1fr;
+	}
 }
