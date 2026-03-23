@@ -1,0 +1,121 @@
+/* Container principal */
+.container {
+	max-width: 800px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background-color: var(--color-background);
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Titre du formulaire */
+.title {
+	font-family: var(--font-subtitle);
+	font-size: var(--font-size-subtitle);
+	font-weight: 600;
+	margin-bottom: 1.5rem;
+	color: var(--color-subtitle);
+}
+
+/* Groupe de champ */
+.formGroup {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1.2rem;
+}
+
+/* Label */
+.formGroup label {
+	font-family: var(--font-regular);
+	font-weight: 600;
+	margin-bottom: 0.4rem;
+	color: var(--color-subtitle);
+	font-size: 14px;
+}
+
+/* Inputs, textarea, select */
+.formGroup input[type="text"],
+.formGroup input[type="number"],
+.formGroup input[type="file"],
+.formGroup textarea,
+.formGroup select {
+	padding: 0.6rem 0.8rem;
+	border-radius: 6px;
+	border: 1px solid #d1d5db;
+	font-family: var(--font-regular);
+	font-size: var(--font-size-regular);
+	color: var(--color-title);
+	background-color: #fff;
+	transition:
+		border-color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+	outline: none;
+	border-color: var(--color-subtitle);
+	box-shadow: 0 0 0 3px rgba(127, 85, 57, 0.2);
+}
+
+/* Textarea */
+.formGroup textarea {
+	min-height: 100px;
+	resize: vertical;
+}
+
+/* Groupes de checkbox et radio */
+.checkboxGroup {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin-top: 0.4rem;
+}
+
+.checkboxGroup input[type="checkbox"] {
+	margin-right: 0.4rem;
+	cursor: pointer;
+}
+
+.checkboxGroup label {
+	cursor: pointer;
+	font-family: var(--font-regular);
+}
+
+/* Messages d'erreur */
+small[role="alert"] {
+	color: #dc2626; /* rouge */
+	margin-top: 0.2rem;
+	font-size: 12px;
+	font-family: var(--font-regular);
+}
+
+/* Bouton submit */
+.submitButton {
+	font-family: var(--font-regular);
+	font-size: var(--font-size-regular);
+	border-radius: 9999px;
+	background-color: var(--color-subtitle);
+	color: var(--color-button-text);
+	padding: 0.6rem 1.5rem;
+	border: none;
+	cursor: pointer;
+	font-weight: 600;
+	transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+	background-color: var(--color-title);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+	.container {
+		padding: 1.5rem;
+	}
+
+	.checkboxGroup {
+		flex-direction: column;
+	}
+}

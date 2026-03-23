@@ -3,32 +3,22 @@
 import { useEffect, useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { date } from "zod";
 import type { ZodIssue } from "zod/v3";
 import type { Product } from "../../models/product";
+import styles from "../assets/css/admin_product_form.module.css";
 import type { AdminProductsForm_props } from "../models/props/admin_products_form_props";
 import ProductApiService from "../services/product_api_service";
 
 const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
-	/*
-react hook form
-- register : remplacer l'attribut name, permet de référencer le champ de saisie lors de la soumission du formulaire
-- handleSubmit: permet de gérer la soumission du formulaire
-- reset : permet de pré-remplir le formulaire avec des données
-- errors : récupérer les erreurs de saisie
-*/ const {
+	const {
 		register,
 		handleSubmit,
 		reset,
 		formState: { errors },
 	} = useForm<Partial<Product>>();
 
-	// préremplir le formulaire avant l'affichage du composant
 	useEffect(() => {
-		// si des données sont à méttre à jour
 		if (dataToUpdate) {
-			// normaliser les données saisies : se baser sur les données testées dans flashpost pour que les données marchent
-
 			const normalizedData = {
 				...dataToUpdate,
 				undertone_ids: (dataToUpdate.undertone_ids as string).split(","),
@@ -39,28 +29,23 @@ react hook form
 		}
 	}, [dataToUpdate, reset]);
 
-	// console.log(validator);
-
-	// IDs pour l’accessibilité
 	const nameID = useId();
 	const priceID = useId();
 	const descriptionID = useId();
-	const undertoneID = useId();
 	const skinColorID = useId();
-	const skinTypeID = useId();
 	const imageID = useId();
 
-	// useNavigate permet de créer une redirection
-	const navigate = useNavigate();
-	// stocker les messages d'erreur de validation coté serveur
-	const [serverErrors, setServerErrors] = useState<Partial<Product>>();
+	// IDs uniques pour checkbox
+	const undertoneNeutreID = useId();
+	const undertoneChaudID = useId();
+	const skinTypeGrasID = useId();
+	const skinTypeMixteID = useId();
 
-	// message lié à la soumission du formulaire
+	const navigate = useNavigate();
+	const [serverErrors, setServerErrors] = useState<Partial<Product>>();
 	const [message, setMessage] = useState<string>("");
 
 	const submitForm = async (data: Partial<Product>) => {
-		// normaliser les données saisies : se baser sur les données testées dans flashpost pour que les données marchent
-
 		const normalizedData = {
 			...data,
 			undertone_ids: (data.undertone_ids as unknown as string[]).join(),
@@ -69,29 +54,19 @@ react hook form
 			image: (data.image as string)[0],
 		};
 
-		// validation de la saisie avec le validateur côté serveur
 		const validation = await validator(normalizedData);
 
-		// si la validation échoue
 		if (validation instanceof Error) {
-			// 	// stocker les messages d'erreur
-			let errors = {};
-
-			// récuperer les messages d'erreur
+			const errors: any = {};
 			(JSON.parse(validation.message) as ZodIssue[]).map((item) => {
-				errors = { ...errors, [item.path.shift() as string]: item.message };
+				errors[item.path.shift() as string] = item.message;
 				return errors;
 			});
-			// définir l'état affichant les messages d'erreur coé serveur
 			setServerErrors(errors);
-			// stopprt l'execution du scrpit
 			return;
 		}
 
-		// si la validation réussie
-		// si le formulaire contient un champ de fichier : envoyer vers l'api un objet de type formData
 		const formData = new FormData();
-		// reprendre strictement le nom du champ de formulaire testé avec flashpost
 		formData.set("id", normalizedData.id as unknown as string);
 		formData.set("name", normalizedData.name as string);
 		formData.set("price", normalizedData.price as unknown as string);
@@ -101,30 +76,28 @@ react hook form
 		formData.set("skin_type_ids", normalizedData.skin_type_ids as string);
 		formData.set("skin_color_ids", normalizedData.skin_color_ids as string);
 
-		// requête HTTP vers l'API
 		const process = dataToUpdate
 			? await new ProductApiService().update(formData)
 			: await new ProductApiService().insert(formData);
 
-		// si la requête HTTP a réussie
-		if ([200, 201].indexOf(process.status) !== -1) {
-			// redirection
+		if ([200, 201].includes(process.status)) {
 			navigate("/admin/products");
-		}
-
-		// si la requête HTTP échoue
-		else if ([400].indexOf(process.status) !== -1) {
-			// afficher un message
+		} else if (process.status === 400) {
 			setMessage(process.data as unknown as string);
 		}
 	};
 
 	return (
 		<>
-			message ? <p role="alert">{message}</p> :
-			<form onSubmit={handleSubmit(submitForm)} encType="multipart/form-data">
+			{message && <p role="alert">{message}</p>}
+
+			<form
+				onSubmit={handleSubmit(submitForm)}
+				encType="multipart/form-data"
+				className={styles.form}
+			>
 				{/* Nom */}
-				<div>
+				<div className={styles.formGroup}>
 					<label htmlFor={nameID}>Nom du produit</label>
 					<input
 						id={nameID}
@@ -141,23 +114,16 @@ react hook form
 				</div>
 
 				{/* Prix */}
-				<div>
+				<div className={styles.formGroup}>
 					<label htmlFor={priceID}>Prix</label>
-					<input
-						id={priceID}
-						type="number"
-						{...register("price", {
-							// required: "Le prix est obligatoire",
-							// min: { value: 0, message: "Le prix doit être positif" },
-						})}
-					/>
+					<input id={priceID} type="number" {...register("price")} />
 					<small role="alert">
 						{errors.price?.message ?? serverErrors?.price}
 					</small>
 				</div>
 
 				{/* Description */}
-				<div>
+				<div className={styles.formGroup}>
 					<label htmlFor={descriptionID}>Description</label>
 					<textarea
 						id={descriptionID}
@@ -167,12 +133,12 @@ react hook form
 						})}
 					/>
 					<small role="alert">
-						{errors.description?.message ?? serverErrors?.name}
+						{errors.description?.message ?? serverErrors?.description}
 					</small>
 				</div>
 
-				{/* Couleurs de peau - select multiple */}
-				<div>
+				{/* Couleurs de peau */}
+				<div className={styles.formGroup}>
 					<label htmlFor={skinColorID}>Couleurs de peau</label>
 					<select
 						id={skinColorID}
@@ -185,80 +151,79 @@ react hook form
 						<option value="2">DARK SKINED</option>
 					</select>
 					<small role="alert">
-						{errors.skin_color_ids?.message ?? serverErrors?.name}
+						{errors.skin_color_ids?.message ?? serverErrors?.skin_color_ids}
 					</small>
 				</div>
 
-				{/* Sous-ton - select simple */}
-				<div>
-					<label htmlFor={undertoneID}>Sous-ton</label>
-					<p>
+				{/* Sous-ton */}
+				<div className={styles.formGroup}>
+					<label>Sous-ton</label>
+					<div className={styles.checkboxGroup}>
 						<input
+							id={undertoneNeutreID}
 							type="checkbox"
-							{...register("undertone_ids", {
-								required: "Le sous-ton est obligatoire",
-							})}
 							value="1"
-						/>
-						<label htmlFor="">Neutre</label>
-					</p>
-					<p>
-						<input
-							type="checkbox"
 							{...register("undertone_ids", {
 								required: "Le sous-ton est obligatoire",
 							})}
-							value="2"
 						/>
-						<label htmlFor="">Chaud</label>
-					</p>
+						<label htmlFor={undertoneNeutreID}>Neutre</label>
+
+						<input
+							id={undertoneChaudID}
+							type="checkbox"
+							value="2"
+							{...register("undertone_ids", {
+								required: "Le sous-ton est obligatoire",
+							})}
+						/>
+						<label htmlFor={undertoneChaudID}>Chaud</label>
+					</div>
 					<small role="alert">
 						{errors.undertone_ids?.message ?? serverErrors?.undertone_ids}
 					</small>
 				</div>
 
-				<div>
-					<label htmlFor={skinTypeID}>types</label>
-					<p>
+				{/* Types de peau */}
+				<div className={styles.formGroup}>
+					<label>Type de peau</label>
+					<div className={styles.checkboxGroup}>
 						<input
+							id={skinTypeGrasID}
 							type="checkbox"
-							{...register("skin_type_ids", {
-								required: "Le type est obligatoire",
-							})}
 							value="1"
-						/>
-						<label htmlFor="">Gras</label>
-					</p>
-					<p>
-						<input
-							type="checkbox"
 							{...register("skin_type_ids", {
 								required: "Le type est obligatoire",
 							})}
-							value="2"
 						/>
-						<label htmlFor="">Mixte</label>
-					</p>
+						<label htmlFor={skinTypeGrasID}>Gras</label>
+
+						<input
+							id={skinTypeMixteID}
+							type="checkbox"
+							value="2"
+							{...register("skin_type_ids", {
+								required: "Le type est obligatoire",
+							})}
+						/>
+						<label htmlFor={skinTypeMixteID}>Mixte</label>
+					</div>
 					<small role="alert">
 						{errors.skin_type_ids?.message ?? serverErrors?.skin_type_ids}
 					</small>
 				</div>
 
-				<div>
-					<label htmlFor={imageID}>image</label>
+				{/* Image */}
+				<div className={styles.formGroup}>
+					<label htmlFor={imageID}>Image</label>
 					<input
 						id={imageID}
 						type="file"
 						{...register(
 							"image",
-							dataToUpdate
-								? {}
-								: {
-										required: "L'image est obligatoire",
-									},
+							dataToUpdate ? {} : { required: "L'image est obligatoire" },
 						)}
 					/>
-
 					<small role="alert">
 						{errors.image?.message ?? serverErrors?.image}
 					</small>
@@ -266,7 +231,9 @@ react hook form
 
 				<input type="hidden" {...register("id")} />
 
-				<button type="submit">Soumettre</button>
+				<button type="submit" className={styles.submitButton}>
+					Soumettre
+				</button>
 			</form>
 		</>
 	);

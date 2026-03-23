@@ -1,0 +1,125 @@
+/* Conteneur principal */
+.admin-products-container {
+	max-width: 1200px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background-color: var(--color-background);
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	font-family: var(--font-regular);
+}
+
+/* Header avec titre et bouton ajouter */
+.admin-products-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2rem;
+}
+
+.admin-products-header h2 {
+	font-family: var(--font-subtitle);
+	font-size: var(--font-size-subtitle);
+	font-weight: 600;
+	color: var(--color-subtitle);
+	margin: 0;
+}
+
+/* Bouton ajouter */
+.admin-products-add-button {
+	font-family: var(--font-regular);
+	font-size: var(--font-size-regular);
+	border-radius: 9999px;
+	background-color: var(--color-subtitle);
+	color: var(--color-button-text);
+	padding: 0.6rem 1.2rem;
+	text-decoration: none;
+	font-weight: 600;
+	transition: background-color 0.2s ease;
+}
+
+.admin-products-add-button:hover {
+	background-color: var(--color-title);
+}
+
+/* Carte produit */
+.admin-product-card {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 1.5rem;
+	margin-bottom: 1rem;
+	border-radius: 8px;
+	background-color: #ffffff;
+	border: 1px solid #e5e7eb;
+	transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.admin-product-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Informations produit */
+.admin-product-info p {
+	margin: 0.2rem 0;
+	color: var(--color-title);
+	font-family: var(--font-regular);
+}
+
+/* Actions (modifier / supprimer) */
+.admin-product-actions {
+	display: flex;
+	gap: 0.5rem;
+}
+
+/* Boutons actions */
+.admin-products-action-button {
+	padding: 0.4rem 0.8rem;
+	border-radius: 9999px;
+	font-weight: 600;
+	text-decoration: none;
+	color: #fff;
+	transition: background-color 0.2s ease;
+	cursor: pointer;
+	text-align: center;
+	font-family: var(--font-regular);
+}
+
+/* Modifier */
+.admin-products-action-button.modify {
+	background-color: #7f5539;
+}
+
+.admin-products-action-button.modify:hover {
+	background-color: #5b2c10;
+}
+
+/* Supprimer */
+.admin-products-action-button.delete {
+	background-color: #ef4444;
+}
+
+.admin-products-action-button.delete:hover {
+	background-color: #b91c1c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.admin-product-card {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.admin-product-actions {
+		margin-top: 0.5rem;
+	}
+
+	.admin-products-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+}

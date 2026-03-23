@@ -1,0 +1,67 @@
+/* Conteneur principal */
+.product-details-container {
+	max-width: 900px;
+	margin: 2rem auto;
+	padding: 2rem;
+	background-color: var(--color-background);
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	font-family: var(--font-regular);
+	color: #333;
+}
+
+/* Titre du produit */
+.product-details-container h1 {
+	font-family: var(--font-title);
+	font-size: 2.5rem;
+	color: var(--color-title);
+	margin-bottom: 1rem;
+}
+
+/* Description */
+.product-details-container h2 {
+	font-family: var(--font-subtitle);
+	font-size: 1.5rem;
+	color: var(--color-subtitle);
+	margin-bottom: 1rem;
+	font-weight: 600;
+}
+
+/* Infos supplémentaires */
+.product-details-container p {
+	font-size: var(--font-size-regular);
+	margin: 0.5rem 0;
+}
+
+/* Mise en avant des labels */
+.product-details-container p strong {
+	color: var(--color-subtitle);
+	font-weight: 600;
+}
+
+/* Image du produit */
+.product-details-container img {
+	width: 100%;
+	max-width: 400px;
+	height: auto;
+	border-radius: 12px;
+	margin-top: 1.5rem;
+	display: block;
+	object-fit: cover;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.product-details-container {
+		padding: 1rem;
+	}
+
+	.product-details-container h1 {
+		font-size: 2rem;
+	}
+
+	.product-details-container h2 {
+		font-size: 1.2rem;
+	}
+}

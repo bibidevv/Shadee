@@ -1,5 +1,6 @@
 import { use } from "react";
 import type { Product } from "../../models/product";
+import styles from "../assets/css/admin_product_form.module.css";
 import ProductForm from "../components/admin_product_form_content";
 import Seo from "../components/shared/seo";
 import type { AdminProductsParams } from "../models/params/admin_products_params";
@@ -37,12 +38,14 @@ const AdminAddProductPage = ({ params }: AdminProductsParams) => {
 				url="/admin/products/add"
 			/>
 
-			<h2>Ajouter un produit</h2>
+			<div className={styles.container}>
+				<h2 className={styles.title}>Ajouter un produit</h2>
 
-			<ProductForm
-				validator={new AdminProductFormValidator().validate}
-				dataToUpdate={dataToUpdate}
-			/>
+				<ProductForm
+					validator={new AdminProductFormValidator().validate}
+					dataToUpdate={dataToUpdate}
+				/>
+			</div>
 		</>
 	);
 };

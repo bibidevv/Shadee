@@ -1,12 +1,30 @@
 import React from "react";
+import styles from "../assets/css/product_details.module.css";
 import type { ProductDetailsContentProps } from "../models/props/product_details_content_props";
 
-// récupération de la props data envoyée par le parent
 const ProductDetailsContent = ({ data }: ProductDetailsContentProps) => {
 	return (
-		<div className="Infos">
+		<div className={styles["product-details-container"]}>
 			<h1>{data.name}</h1>
-			<h2> {data.description}</h2>
+			<h2>{data.description}</h2>
+
+			<p>
+				<strong>Prix :</strong> {data.price}€
+			</p>
+			<p>
+				<strong>Convient aux peaux :</strong>{" "}
+				{data.skin_colors.map((c) => c.name.toLowerCase()).join(", ")}
+			</p>
+			<p>
+				<strong>Types de peaux :</strong>{" "}
+				{data.skin_types.map((t) => t.name.toLowerCase()).join(", ")}
+			</p>
+			<p>
+				<strong>Sous-tons :</strong>{" "}
+				{data.undertones.map((u) => u.name.toLowerCase()).join(", ")}
+			</p>
+
+			<img src={`/assets/img/${data.image}`} alt={data.name} />
 		</div>
 	);
 };

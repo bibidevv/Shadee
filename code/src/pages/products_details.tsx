@@ -8,18 +8,14 @@ import ProductApiService from "../services/product_api_service";
 // params permet de récuperer une variable d'URL
 const ProductsDetails = ({ params }: ProductsDetailsParams) => {
 	const { id } = params;
-	// récuperer les données
+	// récupérer les données
 	const result = use(new ProductApiService().selectOne(id));
-
-	console.log(result);
 
 	return (
 		<>
 			<Seo title="Products" description="Products" url="products" />
-			{/* <ProductsComponent /> */}
-			<p>products</p>
-			<h2>détails</h2>
 
+			<h2>Détails du produit</h2>
 			<ProductDetailsContent data={result.data as Product} />
 		</>
 	);

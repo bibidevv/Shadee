@@ -1,11 +1,12 @@
+import styles from "../assets/css/login.module.css";
 import LoginForm from "../components/login_form";
 
 const LoginPage = () => {
 	return (
-		<>
-			<h1>Connexion</h1>
+		<div className={styles.container}>
+			<h1 className={styles.title}>Connexion</h1>
 			<LoginForm />
-		</>
+		</div>
 	);
 };
 

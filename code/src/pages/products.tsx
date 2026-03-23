@@ -6,18 +6,18 @@ import type { ApiResponse } from "../models/props/api_response";
 import ProductApiService from "../services/product_api_service";
 
 const Products = () => {
-	/* use permet de récuperer les données d'une promesse dans un composant serveur de react */
+	// récupération des produits
 	const results = use<ApiResponse<Product[]>>(
 		new ProductApiService().selectAll(),
 	);
 
-	console.log(results);
-
 	return (
 		<>
-			<Seo title="Products" description="Products" url="products" />
-			{/* <ProductsComponent /> */}
-			<p>products</p>
+			<Seo title="Products" description="Products" url="/products" />
+
+			<h1>Tous les produits</h1>
+
+			{/* Liste des produits */}
 			<Products_list />
 		</>
 	);
