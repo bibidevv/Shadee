@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router";
 import styles from "../assets/css/product_details.module.css";
 import type { ProductDetailsContentProps } from "../models/props/product_details_content_props";
 
@@ -24,7 +24,13 @@ const ProductDetailsContent = ({ data }: ProductDetailsContentProps) => {
 				{data.undertones.map((u) => u.name.toLowerCase()).join(", ")}
 			</p>
 
-			<img src={`/assets/img/${data.image}`} alt={data.name} />
+			<img src={`/images/${data.image}`} alt={data.name} />
+
+			<Link to="/products">
+				<button type="button" className={styles.backButton}>
+					← Retour au catalogue
+				</button>
+			</Link>
 		</div>
 	);
 };

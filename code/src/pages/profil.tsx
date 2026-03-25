@@ -8,7 +8,7 @@ const Profil = () => {
 			<Seo
 				title="Mon profil"
 				description="Gestion du profil utilisateur"
-				url="/profil"
+				url="/Profil"
 			/>
 
 			<ProfilContent />

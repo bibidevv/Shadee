@@ -5,7 +5,7 @@ import Seo from "../components/shared/seo";
 const Favoris = () => {
 	return (
 		<>
-			<Seo title="Mes favoris" description="Produits favoris" url="/favoris" />
+			<Seo title="Mes favoris" description="Produits favoris" url="/Favoris" />
 
 			<FavorisContent />
 		</>

@@ -10,6 +10,8 @@ const Products_list = () => {
 		new ProductApiService().selectAll(),
 	);
 
+	console.log(results);
+
 	return (
 		<div className={styles.productsContainer}>
 			{results.data?.map((item) => (

@@ -7,9 +7,9 @@ import ProductApiService from "../services/product_api_service";
 
 const Products = () => {
 	// récupération des produits
-	const results = use<ApiResponse<Product[]>>(
-		new ProductApiService().selectAll(),
-	);
+	// const results = use<ApiResponse<Product[]>>(
+	// 	new ProductApiService().selectAll(),
+	// );
 
 	return (
 		<>

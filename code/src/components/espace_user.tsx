@@ -27,12 +27,12 @@ const UserHomePage = () => {
 						<p>Des recommandations adaptées à ton profil.</p>
 					</div>
 
-					<Link to="/favoris" className={styles.featureCard}>
+					<Link to="/espace-utilisateur/favoris" className={styles.featureCard}>
 						<span className={styles.icon}>❤️</span>
 						<p>Accès rapide à tes produits favoris.</p>
 					</Link>
 
-					<Link to="/profil" className={styles.featureCard}>
+					<Link to="/espace-utilisateur/profil" className={styles.featureCard}>
 						<span className={styles.icon}>⚙️</span>
 						<p>Modifier ton profil.</p>
 					</Link>

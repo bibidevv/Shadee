@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Link } from "react-router";
 import styles from "../assets/css/HomePage.module.css";
 import mainImage from "../assets/img/skin1.jpg";
 
@@ -16,9 +17,11 @@ const HomePage = () => {
 
 				<h2 className={styles.subtitle}>Trouve le produit qui te correspond</h2>
 
-				<button type="button" className={styles.button}>
-					Voir les produits
-				</button>
+				<Link to="/products">
+					<button type="button" className={styles.button}>
+						Voir les produits
+					</button>
+				</Link>
 			</div>
 
 			<div className={styles.featuresSection}>
@@ -43,9 +46,11 @@ const HomePage = () => {
 					</div>
 				</div>
 
-				<button type="button" className={styles.button}>
-					Créer mon compte
-				</button>
+				<Link to="/register">
+					<button type="button" className={styles.button}>
+						Créer mon compte
+					</button>
+				</Link>
 			</div>
 		</div>
 	);

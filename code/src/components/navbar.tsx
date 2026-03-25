@@ -2,103 +2,67 @@
 
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import styles from "../assets/css/navbar.module.css";
 import logo from "../assets/img/shadeelogo.svg";
 import SecurityService from "../services/security_service";
 
 const NavBar = () => {
 	const [navMobileIsVisible, setNavMobileIsVisible] = useState(false);
-	const navigate = useNavigate();
-	const user = new SecurityService().getUser(); // vérifie si connecté
+	const user = new SecurityService().getUser();
 
 	const handleClick = () => {
 		setNavMobileIsVisible(!navMobileIsVisible);
 	};
 
-	const handleLogout = () => {
-		// juste redirection vers login
-		navigate("/logout");
+	const closeMenu = () => {
+		setNavMobileIsVisible(false);
 	};
 
 	return (
 		<header className={styles.navbar}>
-			{/* Logo */}
 			<img src={logo} alt="Shadee Logo" className={styles.logo} />
 
-			{/* Menu desktop / mobile */}
 			<nav
 				className={`${styles.menu} ${
 					navMobileIsVisible ? styles.menuVisible : ""
 				}`}
 			>
-				<NavLink
-					to="/"
-					className={({ isActive }) => (isActive ? styles.active : "")}
-				>
+				<NavLink to="/" onClick={closeMenu}>
 					Accueil
 				</NavLink>
 
-				<NavLink
-					to="/products"
-					className={({ isActive }) => (isActive ? styles.active : "")}
-				>
+				<NavLink to="/products" onClick={closeMenu}>
 					Produits
 				</NavLink>
 
-				<NavLink
-					to="/contact"
-					className={({ isActive }) => (isActive ? styles.active : "")}
-				>
+				<NavLink to="/contact" onClick={closeMenu}>
 					Contact
 				</NavLink>
-				{/* Lien Admin uniquement si rôle admin */}
-				{new SecurityService().getUser()?.role.name === "admin" ? (
-					<NavLink
-						to="/admin"
-						className={({ isActive }) => (isActive ? styles.active : "")}
-					>
+
+				{user?.role.name === "admin" && (
+					<NavLink to="/admin" onClick={closeMenu}>
 						Admin
 					</NavLink>
-				) : (
-					<></>
 				)}
 
-				{/* Liens selon l'utilisateur */}
 				{user ? (
-					// <button
-					// 	type="button"
-					// 	onClick={handleLogout}
-					// 	className={styles.logoutButton}
-					// >
-					// 	Déconnexion
-					// </button>
-					<NavLink
-						to="/logout"
-						className={({ isActive }) => (isActive ? styles.active : "")}
-					>
+					<NavLink to="/logout" onClick={closeMenu}>
 						Se déconnecter
 					</NavLink>
 				) : (
 					<>
-						<NavLink
-							to="/login"
-							className={({ isActive }) => (isActive ? styles.active : "")}
-						>
+						<NavLink to="/login" onClick={closeMenu}>
 							Se connecter
 						</NavLink>
 
-						<NavLink
-							to="/register"
-							className={({ isActive }) => (isActive ? styles.active : "")}
-						>
+						<NavLink to="/register" onClick={closeMenu}>
 							S'inscrire
 						</NavLink>
 					</>
 				)}
 			</nav>
 
-			{/* Burger menu mobile */}
 			<button
 				type="button"
 				className={styles.burger}

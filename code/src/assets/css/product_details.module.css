@@ -1,60 +1,102 @@
 /* Conteneur principal */
 .product-details-container {
-	max-width: 900px;
-	margin: 2rem auto;
-	padding: 2rem;
+	max-width: 950px;
+	margin: 3rem auto;
+	padding: 2.5rem;
 	background-color: var(--color-background);
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	border-radius: 20px;
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 	font-family: var(--font-regular);
 	color: #333;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
 }
 
-/* Titre du produit */
+/* Image */
+.product-details-container img {
+	width: 100%;
+	max-width: 340px;
+	border-radius: 18px;
+	margin: 1.8rem 0;
+	object-fit: cover;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+	transition: transform 0.2s ease;
+}
+
+.product-details-container img:hover {
+	transform: scale(1.02);
+}
+
+/* Titre */
 .product-details-container h1 {
 	font-family: var(--font-title);
-	font-size: 2.5rem;
+	font-size: 2.4rem;
 	color: var(--color-title);
-	margin-bottom: 1rem;
+	margin-bottom: 0.4rem;
 }
 
 /* Description */
 .product-details-container h2 {
 	font-family: var(--font-subtitle);
-	font-size: 1.5rem;
+	font-size: 1.2rem;
 	color: var(--color-subtitle);
-	margin-bottom: 1rem;
-	font-weight: 600;
+	font-weight: 500;
+	margin-bottom: 1.2rem;
 }
 
-/* Infos supplémentaires */
+/* Paragraphes */
 .product-details-container p {
-	font-size: var(--font-size-regular);
-	margin: 0.5rem 0;
+	font-size: 1.05rem;
+	margin: 6px 0;
+	color: #555;
 }
 
-/* Mise en avant des labels */
+/* Labels type peau / couleur */
 .product-details-container p strong {
 	color: var(--color-subtitle);
 	font-weight: 600;
+	margin-right: 6px;
+	font-size: 1.1rem;
 }
 
-/* Image du produit */
-.product-details-container img {
-	width: 100%;
-	max-width: 400px;
-	height: auto;
-	border-radius: 12px;
-	margin-top: 1.5rem;
-	display: block;
-	object-fit: cover;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+/* Infos importantes (type peau / couleur) */
+.product-details-container p:has(strong) {
+	font-size: 1.1rem;
+}
+
+/* Prix (dernier paragraphe) */
+.product-details-container p:last-of-type {
+	font-size: 1.6rem;
+	font-weight: 700;
+	color: var(--color-title);
+	margin-top: 1rem;
+}
+.backButton {
+	margin-top: 20px;
+	padding: 10px 18px;
+	border-radius: 999px;
+	border: 1px solid var(--color-subtitle);
+	background: transparent;
+	color: var(--color-subtitle);
+	font-family: var(--font-regular);
+	font-size: var(--font-size-regular);
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.backButton:hover {
+	background-color: var(--color-subtitle);
+	color: var(--color-button-text);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
 	.product-details-container {
-		padding: 1rem;
+		padding: 1.5rem;
+		margin: 1.5rem;
 	}
 
 	.product-details-container h1 {
@@ -62,6 +104,10 @@
 	}
 
 	.product-details-container h2 {
-		font-size: 1.2rem;
+		font-size: 1.1rem;
+	}
+
+	.product-details-container img {
+		max-width: 260px;
 	}
 }

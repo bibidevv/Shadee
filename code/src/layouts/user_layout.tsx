@@ -1,9 +1,7 @@
-"use client";
-
 import { Outlet } from "react-router";
 import Guard from "../components/guard";
 
-const AdminLayout = () => {
+const UserLayout = () => {
 	return (
 		<Guard roles={["user"]}>
 			<div>
@@ -16,4 +14,4 @@ const AdminLayout = () => {
 	);
 };
 
-export default AdminLayout;
+export default UserLayout;

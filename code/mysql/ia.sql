@@ -17,9 +17,9 @@ INSERT INTO shadee_dev.product (name, description, image, price) VALUES
 ('Maybelline SuperStay', 'fond de teint couvrant', 'maybelline-superstay-full-coverage-foundation.jpg', 11.99),
 ('Maybelline Age Rewind', 'anti-cernes', 'maybelline-instant-age-rewind-concealer.jpg', 10.99),
 
-('Loreal True Match', 'fond de teint naturel', 'l\'oreal-true-match-foundation.jpg', 14.99),
-('Loreal Infallible', 'fond de teint longue tenue', 'l\'oreal-infallible-foundation.jpg', 15.99),
-('Loreal Concealer', 'correcteur couvrant', 'l\'oreal-infallible-concealer.jpg', 14.99),
+('Loreal True Match', 'fond de teint naturel', "l'oreal-true-match-foundation.jpg", 14.99),
+('Loreal Infallible', 'fond de teint longue tenue', "l'oreal-infallible-foundation.jpg", 15.99),
+('Loreal Concealer', 'correcteur couvrant', "l'oreal-infallible-concealer.jpg", 14.99),
 
 ('MAC Studio Fix', 'fond de teint mat', 'mac-studio-fix-foundation.jpg', 38.00),
 ('MAC Concealer', 'correcteur longue tenue', 'mac-pro-longwear-concealer.jpg', 38.00),
@@ -33,8 +33,8 @@ INSERT INTO shadee_dev.product (name, description, image, price) VALUES
 ('Rare Beauty Foundation', 'fond de teint léger', 'rare-beauty-foundation.jpg', 32.00),
 ('Rare Beauty Concealer', 'anti-cernes', 'rare-beauty-concealer.jpg', 24.00),
 
-('Double Wear', 'fond de teint tenue extrême', 'estee-lauder-double-wear-foundation.jpg', 55.00),
-('Double Wear Concealer', 'correcteur longue tenue', 'estee-lauder-double-wear-concealer.jpg', 35.00),
+('Este Lauder Double Wear', 'fond de teint tenue extrême', 'estee-lauder-double-wear-foundation.jpg', 55.00),
+('Este Lauder Double Wear Concealer', 'correcteur longue tenue', 'estee-lauder-double-wear-concealer.jpg', 35.00),
 
 ('Armani Silk', 'fond de teint lumineux', 'armani-luminous-silk-foundation.jpg', 65.00),
 ('Tarte Shape Tape', 'anti-cernes couvrant', 'tarte-shape-tape-concealer.jpg', 31.00);

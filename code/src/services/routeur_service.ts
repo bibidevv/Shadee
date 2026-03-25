@@ -50,65 +50,61 @@ class RouteurService {
 								lazy: () => import("../pages/mentions_legales_page"),
 							},
 
-							// Espace utilisateur parent
-							{
-								id: "user",
-								path: "espace-utilisateur",
-								lazy: () => import("../layouts/user_layout"), // layout parent
-								children: [
-									{
-										id: "user-home",
-										index: true,
-										path: "",
-										lazy: () => import("../pages/espace_user_page"), // page principale user
-									},
-									{
-										id: "favoris",
-										path: "favoris",
-										lazy: () => import("../pages/favoris"), // page favoris
-									},
-									{
-										id: "profil",
-										path: "profil",
-										lazy: () => import("../pages/profil"), // page profil
-									},
-								],
-							},
-
 							{
 								id: "logout",
 								path: "logout",
 								lazy: () => import("../pages/logout"),
 							},
-
-							// Admin
+						],
+					},
+					{
+						id: "user",
+						path: "espace-utilisateur",
+						lazy: () => import("../layouts/user_layout"),
+						children: [
 							{
-								id: "admin",
-								path: "admin",
-								lazy: () => import("../layouts/admin_layout"),
-								children: [
-									{
-										id: "admin-home",
-										index: true,
-										path: "",
-										lazy: () => import("../pages/admin_page"),
-									},
-									{
-										id: "admin-products",
-										path: "products",
-										lazy: () => import("../pages/admin_products_homepage"),
-									},
-									{
-										id: "admin-products-add",
-										path: "products/add/:id?",
-										lazy: () => import("../pages/admin_products_form"),
-									},
-									{
-										id: "admin-products-delete",
-										path: "products/delete/:id",
-										lazy: () => import("../pages/admin_products_delete"),
-									},
-								],
+								id: "user-home",
+								index: true,
+								path: "",
+								lazy: () => import("../pages/espace_user_page"),
+							},
+							{
+								id: "favoris",
+								path: "favoris",
+								lazy: () => import("../pages/favoris"),
+							},
+							{
+								id: "profil",
+								path: "profil",
+								lazy: () => import("../pages/profil"),
+							},
+						],
+					},
+					{
+						id: "admin",
+						path: "admin",
+						lazy: () => import("../layouts/admin_layout"),
+						children: [
+							{
+								id: "admin-home",
+								index: true,
+								path: "",
+								lazy: () => import("../pages/admin_page"),
+							},
+							{
+								id: "admin-products",
+								path: "products",
+								lazy: () => import("../pages/admin_products_homepage"),
+							},
+							{
+								id: "admin-products-add",
+								path: "products/add/:id?",
+								lazy: () => import("../pages/admin_products_form"),
+							},
+							{
+								id: "admin-products-delete",
+								path: "products/delete/:id",
+								lazy: () => import("../pages/admin_products_delete"),
 							},
 						],
 					},
