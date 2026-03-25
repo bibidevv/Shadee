@@ -2,15 +2,23 @@
 
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import styles from "../assets/css/navbar.module.css";
 import logo from "../assets/img/shadeelogo.svg";
+import SecurityService from "../services/security_service";
 
 const NavBar = () => {
 	const [navMobileIsVisible, setNavMobileIsVisible] = useState(false);
+	const navigate = useNavigate();
+	const user = new SecurityService().getUser(); // vérifie si connecté
 
 	const handleClick = () => {
 		setNavMobileIsVisible(!navMobileIsVisible);
+	};
+
+	const handleLogout = () => {
+		// juste redirection vers login
+		navigate("/logout");
 	};
 
 	return (
@@ -35,7 +43,7 @@ const NavBar = () => {
 					to="/products"
 					className={({ isActive }) => (isActive ? styles.active : "")}
 				>
-					Products
+					Produits
 				</NavLink>
 
 				<NavLink
@@ -44,22 +52,50 @@ const NavBar = () => {
 				>
 					Contact
 				</NavLink>
+				{/* Lien Admin uniquement si rôle admin */}
+				{new SecurityService().getUser()?.role.name === "admin" ? (
+					<NavLink
+						to="/admin"
+						className={({ isActive }) => (isActive ? styles.active : "")}
+					>
+						Admin
+					</NavLink>
+				) : (
+					<></>
+				)}
 
-				{/* Lien login */}
-				<NavLink
-					to="/login"
-					className={({ isActive }) => (isActive ? styles.active : "")}
-				>
-					Se connecter
-				</NavLink>
+				{/* Liens selon l'utilisateur */}
+				{user ? (
+					// <button
+					// 	type="button"
+					// 	onClick={handleLogout}
+					// 	className={styles.logoutButton}
+					// >
+					// 	Déconnexion
+					// </button>
+					<NavLink
+						to="/logout"
+						className={({ isActive }) => (isActive ? styles.active : "")}
+					>
+						Se déconnecter
+					</NavLink>
+				) : (
+					<>
+						<NavLink
+							to="/login"
+							className={({ isActive }) => (isActive ? styles.active : "")}
+						>
+							Se connecter
+						</NavLink>
 
-				{/* 🔹 Nouveau lien register */}
-				<NavLink
-					to="/register"
-					className={({ isActive }) => (isActive ? styles.active : "")}
-				>
-					S'inscrire
-				</NavLink>
+						<NavLink
+							to="/register"
+							className={({ isActive }) => (isActive ? styles.active : "")}
+						>
+							S'inscrire
+						</NavLink>
+					</>
+				)}
 			</nav>
 
 			{/* Burger menu mobile */}

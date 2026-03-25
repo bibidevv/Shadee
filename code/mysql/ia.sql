@@ -1,134 +1,152 @@
 INSERT INTO shadee_dev.product (name, description, image, price) VALUES
-('Fenty Beauty Pro Filt\'r Soft Matte Longwear Foundation', 'Fond de teint liquide mat longue tenue, couvrance moyenne à totale, pour un fini peau nette sans brillance.', 'fenty-pro-filtr-soft-matte-longwear-foundation.jpg', 39.90),
-('Fenty Beauty Pro Filt\'r Hydrating Longwear Foundation', 'Fond de teint hydratant et confortable, couvrance modulable, idéal peaux normales à sèches.', 'fenty-pro-filtr-hydrating-longwear-foundation.jpg', 38.00),
-('Fenty Beauty Pro Filt\'r Soft Matte Powder Foundation', 'Fond de teint poudre mat, tenue longue durée et effet peau lisse, pratique pour retouches.', 'fenty-pro-filtr-soft-matte-powder-foundation.jpg', 34.00),
-('Fenty Beauty Eaze Drop Blurring Skin Tint', 'Skin-tint fluide effet seconde peau, unifie légèrement le teint pour un rendu naturel.', 'fenty-eaze-drop-blurring-skin-tint.jpg', 36.00),
-('Fenty Beauty Pro Filt\'r Instant Retouch Concealer', 'Anti-cernes et correcteur haute couvrance, corrige cernes et imperfections avec un fini naturel.', 'fenty-pro-filtr-instant-retouch-concealer.jpg', 29.90),
+('Fenty Soft Matte Foundation', 'fond de teint mat longue tenue', 'fenty-pro-filtr-soft-matte-longwear-foundation.jpg', 39.90),
+('Fenty Hydrating Foundation', 'fond de teint hydratant', 'fenty-pro-filtr-hydrating-longwear-foundation.jpg', 38.00),
+('Fenty Eaze Drop', 'skin tint léger', 'fenty-eaze-drop-blurring-skin-tint.jpg', 36.00),
+('Fenty Concealer', 'anti-cernes couvrant', 'fenty-pro-filtr-instant-retouch-concealer.jpg', 29.90),
 
-('Charlotte Tilbury Airbrush Flawless Foundation', 'Fond de teint liquide couvrant et lumineux, unifie le teint pour un fini peau parfaite.', 'charlotte-tilbury-airbrush-flawless-foundation.jpg', 52.00),
-('Charlotte Tilbury Light Wonder Foundation', 'Fond de teint léger effet peau nue, texture fluide pour un teint frais et naturel.', 'charlotte-tilbury-light-wonder-foundation.jpg', 52.00),
-('Charlotte Tilbury Magic Away Concealer', 'Anti-cernes crémeux et lumineux, corrige cernes et taches pour un regard reposé.', 'charlotte-tilbury-magic-away-concealer.jpg', 35.00),
+('Charlotte Tilbury Airbrush', 'fond de teint couvrant', 'charlotte-tilbury-airbrush-flawless-foundation.jpg', 52.00),
+('Charlotte Tilbury Light Wonder', 'fond de teint léger hydratant', 'charlotte-tilbury-light-wonder-foundation.jpg', 52.00),
+('Charlotte Tilbury Concealer', 'anti-cernes lumineux', 'charlotte-tilbury-magic-away-concealer.jpg', 35.00),
 
-('NARS Sheer Glow Foundation', 'Fond de teint liquide radiant qui unifie le teint et donne de l’éclat sans effet masque.', 'nars-sheer-glow-foundation.jpg', 44.95),
-('NARS Natural Radiant Longwear Foundation', 'Fond de teint longue tenue, couvrance modulable et fini naturel lumineux pour toutes peaux.', 'nars-natural-radiant-longwear-foundation.jpg', 46.00),
-('NARS Velvet Matte Skin Tint', 'Skin tint mat léger, unifie subtilement le teint pour un fini naturel et durable.', 'nars-velvet-matte-skin-tint.jpg', 40.00),
-('NARS Radiant Creamy Concealer', 'Correcteur crémeux et lumineux, camoufle cernes et irrégularités.', 'nars-radiant-creamy-concealer.jpg', 39.00),
-('NARS Soft Matte Complete Concealer', 'Correcteur mat mais crémeux, camouflage naturel des cernes et rougeurs.', 'nars-soft-matte-complete-concealer.jpg', 38.00),
+('NARS Sheer Glow', 'fond de teint lumineux', 'nars-sheer-glow-foundation.jpg', 44.95),
+('NARS Radiant Foundation', 'fond de teint longue tenue', 'nars-natural-radiant-longwear-foundation.jpg', 46.00),
+('NARS Creamy Concealer', 'correcteur crémeux', 'nars-radiant-creamy-concealer.jpg', 39.00),
 
-('Kevyn Aucoin The Sensual Skin Enhancer', 'Fond de teint / correcteur très couvrant.', 'kevyn-aucoin-sensual-skin-enhancer.jpg', 32.00),
-('Kevyn Aucoin The Etherealist Super Natural Concealer', 'Correcteur fluide haute définition.', 'kevyn-aucoin-etherealist-super-natural-concealer.jpg', 29.95),
-('Kevyn Aucoin SSE Ultra-Correction Stick', 'Correcteur stick haute couvrance.', 'kevyn-aucoin-sse-ultra-correction-stick.jpg', 31.50),
+('Maybelline Fit Me Matte', 'fond de teint matifiant', 'maybelline-fit-me-matte-poreless-foundation.jpg', 9.95),
+('Maybelline Fit Me Dewy', 'fond de teint hydratant', 'maybelline-fit-me-dewy-smooth-foundation.jpg', 10.95),
+('Maybelline SuperStay', 'fond de teint couvrant', 'maybelline-superstay-full-coverage-foundation.jpg', 11.99),
+('Maybelline Age Rewind', 'anti-cernes', 'maybelline-instant-age-rewind-concealer.jpg', 10.99),
 
-('Maybelline Fit Me Matte + Poreless Foundation', 'Fond de teint matifiant qui affine les pores.', 'maybelline-fit-me-matte-poreless-foundation.jpg', 9.95),
-('Maybelline Fit Me Dewy + Smooth Foundation', 'Fond de teint glowy pour peaux normales à sèches.', 'maybelline-fit-me-dewy-smooth-foundation.jpg', 10.95),
-('Maybelline SuperStay Full Coverage Foundation', 'Fond de teint couvrance totale longue tenue.', 'maybelline-superstay-full-coverage-foundation.jpg', 11.99),
+('Loreal True Match', 'fond de teint naturel', 'l\'oreal-true-match-foundation.jpg', 14.99),
+('Loreal Infallible', 'fond de teint longue tenue', 'l\'oreal-infallible-foundation.jpg', 15.99),
+('Loreal Concealer', 'correcteur couvrant', 'l\'oreal-infallible-concealer.jpg', 14.99),
 
-('Maybelline Instant Age Rewind Concealer', 'Anti-cernes avec applicateur éponge.', 'maybelline-instant-age-rewind-concealer.jpg', 10.99),
-('Maybelline Fit Me Concealer', 'Correcteur fluide naturel.', 'maybelline-fit-me-concealer.jpg', 9.99),
-('Maybelline Instant Age Rewind Brightener', 'Correcteur illuminateur.', 'maybelline-instant-age-rewind-brightener.jpg', 11.50),
-('Maybelline SuperStay Concealer', 'Correcteur haute couvrance.', 'maybelline-superstay-concealer.jpg', 12.99),
+('MAC Studio Fix', 'fond de teint mat', 'mac-studio-fix-foundation.jpg', 38.00),
+('MAC Concealer', 'correcteur longue tenue', 'mac-pro-longwear-concealer.jpg', 38.00),
 
-('L’Oréal Paris True Match Foundation', 'Fond de teint modulable avec large choix de teintes.', 'loreal-true-match-foundation.jpg', 14.99),
-('L’Oréal Paris Infallible 24H Fresh Wear Foundation', 'Fond de teint longue tenue confortable.', 'loreal-infallible-24h-fresh-wear-foundation.jpg', 15.99),
-('L’Oréal Paris Infallible Matte Cover Foundation', 'Fond de teint matifiant longue durée.', 'loreal-infallible-matte-cover-foundation.jpg', 15.99),
-('L’Oréal Paris Infallible Fresh Wear Concealer', 'Correcteur fluide longue tenue.','loreal-infallible-fresh-wear-concealer.jpg', 14.99),
+('Dior Backstage', 'fond de teint naturel', 'dior-backstage-foundation.jpg', 43.00),
+('Dior Glow', 'fond de teint lumineux', 'dior-forever-glow-foundation.jpg', 57.00),
 
-('MAC Studio Fix Fluid Foundation', 'Fond de teint iconique couvrance modulable.', 'mac-studio-fix-fluid-foundation.jpg', 38.00),
-('MAC Pro Longwear Concealer', 'Correcteur longue tenue haute couvrance.','mac-pro-longwear-concealer.jpg', 38.00);
+('Huda Faux Filter', 'fond de teint couvrant', 'huda-faux-filter-foundation.jpg', 40.00),
+('Huda Concealer', 'correcteur couvrant', 'huda-overachiever-concealer.jpg', 30.00),
 
+('Rare Beauty Foundation', 'fond de teint léger', 'rare-beauty-foundation.jpg', 32.00),
+('Rare Beauty Concealer', 'anti-cernes', 'rare-beauty-concealer.jpg', 24.00),
 
-INSERT INTO shadee_dev.product_undertone (product_id, undertone_id) VALUES
-(1,1),(1,2),(1,3),
-(2,2),(2,3),
-(3,1),(3,3),
-(4,2),
-(5,1),(5,2),(5,3),
+('Double Wear', 'fond de teint tenue extrême', 'estee-lauder-double-wear-foundation.jpg', 55.00),
+('Double Wear Concealer', 'correcteur longue tenue', 'estee-lauder-double-wear-concealer.jpg', 35.00),
+
+('Armani Silk', 'fond de teint lumineux', 'armani-luminous-silk-foundation.jpg', 65.00),
+('Tarte Shape Tape', 'anti-cernes couvrant', 'tarte-shape-tape-concealer.jpg', 31.00);
+
+INSERT INTO shadee_dev.product_undertone VALUES
+-- inclusifs
+(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3),(4,1),(4,2),(4,3),
+(8,1),(8,2),(8,3),(9,1),(9,2),(9,3),(10,1),(10,2),(10,3),
+(18,1),(18,2),(18,3),(20,1),(20,2),(20,3),
+(22,1),(22,2),(22,3),(24,1),(24,2),(24,3),
+(26,1),(26,2),(26,3),(28,1),(28,2),(28,3),
+
+-- autres
+(5,2),(5,3),
 (6,1),(6,2),
 (7,2),(7,3),
-(8,1),(8,2),
-(9,2),
-(10,1),(10,3),
-(11,3),
-(12,1),(12,2),(12,3),
-(13,1),(13,2),
-(14,1),(14,2),(14,3),
-(15,3),
-(16,1),(16,3),
-(17,1),
-(18,2),
-(19,1),(19,2),
-(20,2),(20,3),
-(21,1),
-(22,2),(22,3),
-(23,1),(23,3),
-(24,1),(24,2),(24,3),
-(25,2),
-(26,1),
-(27,1),(27,2),
-(28,1),(28,3),
-(29,2);
-        
+(11,2),(11,3),
+(12,1),(12,2),
+(13,2),(13,3),
+(14,1),(14,2),
+(15,1),(15,2),
+(16,2),(16,3),
+(17,1),(17,2),
+(19,2),(19,3),
+(21,1),(21,2),
+(23,2),(23,3),
+(25,1),(25,2),
+(27,2),(27,3),
+(29,1),(29,2);
 
-INSERT INTO shadee_dev.product_skin_type (product_id, skin_type_id) VALUES
-(1,1),(1,2),(1,3),(1,4),
+INSERT INTO shadee_dev.product_skin_type VALUES
+-- Fenty
+(1,3),(1,4),
 (2,1),(2,2),
-(3,3),(3,4),
-(4,2),(4,3),
-(5,1),(5,2),(5,3),(5,4),
-(6,1),(6,2),(6,3),
+(3,1),(3,2),(3,3),(3,4),
+(4,1),(4,2),(4,3),(4,4),
+
+-- CT
+(5,2),(5,3),
+(6,1),(6,2),
 (7,1),(7,2),
-(8,1),(8,4),
-(9,2),(9,3),
-(10,1),(10,2),(10,3),
-(11,3),(11,4),
-(12,1),(12,2),(12,3),(12,4),
-(13,1),(13,2),(13,3),
-(14,1),(14,4),
-(15,2),(15,3),
-(16,1),(16,2),
-(17,3),(17,4),
-(18,1),(18,2),
-(19,3),(19,4),
-(20,1),(20,2),(20,3),
-(21,2),(21,3),
-(22,1),(22,2),
-(23,3),(23,4),
-(24,1),(24,2),(24,3),
-(25,2),(25,3),
-(26,3),(26,4),
-(27,1),(27,2),
-(28,1),(28,2),(28,3),
-(29,1),(29,4);
-             
 
-INSERT INTO shadee_dev.product_skin_color (product_id, skin_color_id) VALUES
-(1,1),(1,2),
-(2,1),(2,2),
-(3,1),
-(4,2),
+-- NARS
+(8,1),(8,2),(8,3),
+(9,2),(9,3),
+(10,1),(10,2),(10,4),
+
+-- Maybelline
+(11,3),(11,4),
+(12,1),(12,2),
+(13,2),(13,3),
+(14,1),(14,2),(14,3),
+
+-- Loreal
+(15,1),(15,2),(15,3),
+(16,2),(16,3),(16,4),
+(17,1),(17,2),(17,3),
+
+-- MAC
+(18,3),(18,4),
+(19,3),(19,4),
+
+-- Dior
+(20,1),(20,2),
+(21,1),(21,2),
+
+-- Huda
+(22,3),(22,4),
+(23,3),(23,4),
+
+-- Rare
+(24,1),(24,2),(24,3),
+(25,1),(25,2),(25,3),
+
+-- EL
+(26,3),(26,4),
+(27,3),(27,4),
+
+-- Armani / Tarte
+(28,1),(28,2),
+(29,2),(29,3);
+
+INSERT INTO shadee_dev.product_skin_color VALUES
+-- inclusifs
+(1,1),(1,2),(2,1),(2,2),(3,1),(3,2),(4,1),(4,2),
+(8,1),(8,2),(9,1),(9,2),(10,1),(10,2),
+(18,1),(18,2),(20,1),(20,2),
+(22,1),(22,2),(24,1),(24,2),
+(26,1),(26,2),(28,1),(28,2),
+
+-- biais réalistes (mais corrigés)
 (5,1),(5,2),
 (6,1),
 (7,1),
-(8,1),(8,2),
-(9,2),
-(10,1),(10,2),
-(11,2),
-(12,1),(12,2),
-(13,1),
-(14,1),(14,2),
-(15,2),
-(16,1),(16,2),
-(17,1),
-(18,2),
-(19,1),(19,2),
-(20,1),(20,2),
-(21,1),
-(22,1),(22,2),
-(23,2),
-(24,1),(24,2),
-(25,1),
-(26,2),
-(27,1),(27,2),
-(28,1),
-(29,1),(29,2);
 
+(11,1),
+(12,1),
+(13,1),(13,2),
+(14,1),(14,2),
+
+(15,1),(15,2),
+(16,1),(16,2),
+(17,1),(17,2),
+
+(19,1),(19,2),
+
+(21,1),
+
+(23,1),(23,2),
+
+(25,1),(25,2),
+
+(27,1),(27,2),
+
+(29,1),(29,2);

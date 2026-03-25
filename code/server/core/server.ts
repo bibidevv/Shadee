@@ -3,6 +3,7 @@ import express, { type Router } from "express";
 import HomepageRouter from "../router/homepage_router";
 import ProductRouter from "../router/product_router";
 import RoleRouter from "../router/role_router";
+import SecurityRouter from "../router/security_router";
 import Skin_colorRouter from "../router/skin_color_router";
 import Skin_typeRouter from "../router/skin_type_router";
 import UndertoneRouter from "../router/undertone_router";
@@ -41,6 +42,7 @@ class Server {
 		this.router.use("/api/skin_type", new Skin_typeRouter().getRoutes());
 		this.router.use("/api/undertone", new UndertoneRouter().getRoutes());
 		this.router.use("/api/user", new UserRouter().getRoutes());
+		this.router.use("/api", new SecurityRouter().getRoutes());
 	};
 
 	// démarrer le serveur

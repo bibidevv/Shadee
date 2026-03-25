@@ -5,10 +5,10 @@ import Guard from "../components/guard";
 
 const AdminLayout = () => {
 	return (
-		<Guard roles={["admin"]}>
+		<Guard roles={["user"]}>
 			<div>
 				<main style={{ padding: "2rem" }}>
-					<h1>Administration</h1>
+					<h1>Utilisateur</h1>
 					<Outlet />
 				</main>
 			</div>

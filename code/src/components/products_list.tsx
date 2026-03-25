@@ -14,7 +14,7 @@ const Products_list = () => {
 		<div className={styles.productsContainer}>
 			{results.data?.map((item) => (
 				<article key={item.id} className={styles.productItem}>
-					<img src={`/assets/img/${item.image}`} alt={item.name} />
+					<img src={`/images/${item.image}`} alt={item.name} />
 
 					<h2>{item.name}</h2>
 

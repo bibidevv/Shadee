@@ -1,16 +1,42 @@
 "use client";
 
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import type { User } from "../../models/user";
 import styles from "../assets/css/login.module.css";
+import SecurityApiService from "../services/security_api_service";
+import SecurityService from "../services/security_service";
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [message, setMessage] = useState("");
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const navigate = useNavigate();
+
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log({ email, password });
+
+		const process = await new SecurityApiService().login({
+			email: email,
+			password: password,
+		});
+
+		if ([200, 201].includes(process.status)) {
+			const user = process.data as User;
+
+			// stocker l'utilisateur
+			new SecurityService().setUser(user);
+
+			if (user.role.name === "admin") {
+				navigate("/admin");
+				return;
+			}
+
+			navigate("/espace-utilisateur");
+		} else if ([400, 401, 403].includes(process.status)) {
+			setMessage("Une erreur est survenue. Veuillez réessayer.");
+		}
 	};
 
 	return (
@@ -46,6 +72,8 @@ const LoginForm = () => {
 			<button type="submit" className={styles.button}>
 				Se connecter
 			</button>
+
+			{message && <p>{message}</p>}
 
 			<p className={styles.register}>
 				Pas encore de compte ? <Link to="/register">S'inscrire</Link>

@@ -38,8 +38,12 @@ const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
 	// IDs uniques pour checkbox
 	const undertoneNeutreID = useId();
 	const undertoneChaudID = useId();
-	const skinTypeGrasID = useId();
-	const skinTypeMixteID = useId();
+	const undertoneFroidID = useId();
+
+	const skinTypeOilyID = useId();
+	const skinTypeComboID = useId();
+	const skinTypeDryID = useId();
+	const skinTypeNormalID = useId();
 
 	const navigate = useNavigate();
 	const [serverErrors, setServerErrors] = useState<Partial<Product>>();
@@ -157,7 +161,7 @@ const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
 
 				{/* Sous-ton */}
 				<div className={styles.formGroup}>
-					<label>Sous-ton</label>
+					<label htmlFor={skinColorID}>Sous-ton</label>
 					<div className={styles.checkboxGroup}>
 						<input
 							id={undertoneNeutreID}
@@ -167,7 +171,7 @@ const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
 								required: "Le sous-ton est obligatoire",
 							})}
 						/>
-						<label htmlFor={undertoneNeutreID}>Neutre</label>
+						<label htmlFor={undertoneNeutreID}>Neutral</label>
 
 						<input
 							id={undertoneChaudID}
@@ -177,8 +181,19 @@ const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
 								required: "Le sous-ton est obligatoire",
 							})}
 						/>
-						<label htmlFor={undertoneChaudID}>Chaud</label>
+						<label htmlFor={undertoneChaudID}>Warm</label>
+
+						<input
+							id={undertoneFroidID}
+							type="checkbox"
+							value="3"
+							{...register("undertone_ids", {
+								required: "Le sous-ton est obligatoire",
+							})}
+						/>
+						<label htmlFor={undertoneChaudID}>Cool</label>
 					</div>
+
 					<small role="alert">
 						{errors.undertone_ids?.message ?? serverErrors?.undertone_ids}
 					</small>
@@ -186,27 +201,47 @@ const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
 
 				{/* Types de peau */}
 				<div className={styles.formGroup}>
-					<label>Type de peau</label>
+					<label htmlFor={skinColorID}>Type de peau</label>
 					<div className={styles.checkboxGroup}>
 						<input
-							id={skinTypeGrasID}
+							id={skinTypeOilyID}
 							type="checkbox"
 							value="1"
 							{...register("skin_type_ids", {
 								required: "Le type est obligatoire",
 							})}
 						/>
-						<label htmlFor={skinTypeGrasID}>Gras</label>
+						<label htmlFor={skinTypeOilyID}>Oily</label>
 
 						<input
-							id={skinTypeMixteID}
+							id={skinTypeComboID}
 							type="checkbox"
 							value="2"
 							{...register("skin_type_ids", {
 								required: "Le type est obligatoire",
 							})}
 						/>
-						<label htmlFor={skinTypeMixteID}>Mixte</label>
+						<label htmlFor={skinTypeComboID}>Combo</label>
+
+						<input
+							id={skinTypeNormalID}
+							type="checkbox"
+							value="3"
+							{...register("skin_type_ids", {
+								required: "Le type est obligatoire",
+							})}
+						/>
+						<label htmlFor={skinTypeNormalID}>Normal</label>
+
+						<input
+							id={skinTypeDryID}
+							type="checkbox"
+							value="4"
+							{...register("skin_type_ids", {
+								required: "Le type est obligatoire",
+							})}
+						/>
+						<label htmlFor={skinTypeDryID}>Dry</label>
 					</div>
 					<small role="alert">
 						{errors.skin_type_ids?.message ?? serverErrors?.skin_type_ids}

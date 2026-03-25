@@ -3,15 +3,19 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import styles from "../assets/css/register.module.css";
+import SecurityApiService from "../services/security_api_service";
 
 const RegisterForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [username, setUsername] = useState("");
+	// const [username, setUsername] = useState("");
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log({ email, password, username });
+		const process = new SecurityApiService().register({
+			email: email,
+			password: password,
+		});
 	};
 
 	return (
@@ -44,7 +48,7 @@ const RegisterForm = () => {
 				/>
 			</div>
 
-			<div className={styles.group}>
+			{/* <div className={styles.group}>
 				<label htmlFor="username" className={styles.label}>
 					Nom d'utilisateur
 				</label>
@@ -55,7 +59,7 @@ const RegisterForm = () => {
 					onChange={(e) => setUsername(e.target.value)}
 					className={styles.input}
 				/>
-			</div>
+			</div> */}
 
 			<button type="submit" className={styles.button}>
 				S'inscrire

@@ -10,3 +10,19 @@
 	position: relative;
 	bottom: 0;
 }
+
+.footer p {
+	margin: 0.3rem 0;
+}
+
+.footer a {
+	color: var(--color-button-text);
+	text-decoration: underline;
+	font-weight: 600;
+	margin-left: 6px;
+	transition: color 0.2s ease;
+}
+
+.footer a:hover {
+	color: var(--color-title);
+}
