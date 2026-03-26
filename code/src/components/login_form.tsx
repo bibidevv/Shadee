@@ -28,6 +28,10 @@ const LoginForm = () => {
 			// stocker l'utilisateur
 			new SecurityService().setUser(user);
 
+			// stocker le token JWT
+			await new SecurityService().setToken(user);
+			console.log(new SecurityService().getToken());
+
 			if (user.role.name === "admin") {
 				navigate("/admin");
 				return;

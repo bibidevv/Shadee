@@ -1,6 +1,7 @@
 import express from "express";
 import multer from "multer";
 import ProductController from "../controller/product_controller";
+import AuthorizationMiddleware from "../middleware/authorization_middleware";
 
 class ProductRouter {
 	// routeur express
@@ -18,13 +19,27 @@ class ProductRouter {
 
 		// POST /api/product et utilisation du middlewear multer
 		// ajout d'un enregistrement
-		this.router.post("/", this.multer.any(), new ProductController().insert);
+		this.router.post(
+			"/",
+			this.multer.any(),
+			new AuthorizationMiddleware().authorize(["admin"]),
+			new ProductController().insert,
+		);
 
 		// maj d'un enregistrement
-		this.router.put("/", this.multer.any(), new ProductController().update);
+		this.router.put(
+			"/",
+			this.multer.any(),
+			new AuthorizationMiddleware().authorize(["admin"]),
+			new ProductController().update,
+		);
 
 		// suppression d'un enregistrement
-		this.router.delete("/", new ProductController().delete);
+		this.router.delete(
+			"/",
+			new AuthorizationMiddleware().authorize(["admin"]),
+			new ProductController().delete,
+		);
 
 		return this.router;
 	};

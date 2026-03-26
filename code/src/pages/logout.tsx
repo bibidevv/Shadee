@@ -11,8 +11,16 @@ const Logout = () => {
 	// supprimer à l'affichage de la page/composant
 
 	useEffect(() => {
-		//supprimer l'utilisateur stocké
-		new SecurityService().setUser(null);
+		// const reset = async () => {
+		// 	//supprimer l'utilisateur stocké
+		// 	new SecurityService().setUser(null);
+
+		// 	// stocker le token JWT
+		// 	await new SecurityService().setToken(null);
+		// };
+
+		// reset();
+		new SecurityService().logout();
 
 		// redirection vers une route
 		navigate("/");

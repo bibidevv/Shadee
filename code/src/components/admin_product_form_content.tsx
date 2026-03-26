@@ -8,6 +8,7 @@ import type { Product } from "../../models/product";
 import styles from "../assets/css/admin_product_form.module.css";
 import type { AdminProductsForm_props } from "../models/props/admin_products_form_props";
 import ProductApiService from "../services/product_api_service";
+import SecurityService from "../services/security_service";
 
 const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
 	const {
@@ -81,8 +82,14 @@ const ProductForm = ({ validator, dataToUpdate }: AdminProductsForm_props) => {
 		formData.set("skin_color_ids", normalizedData.skin_color_ids as string);
 
 		const process = dataToUpdate
-			? await new ProductApiService().update(formData)
-			: await new ProductApiService().insert(formData);
+			? await new ProductApiService().update(
+					formData,
+					new SecurityService().getToken() as string,
+				)
+			: await new ProductApiService().insert(
+					formData,
+					new SecurityService().getToken() as string,
+				);
 
 		if ([200, 201].includes(process.status)) {
 			navigate("/admin/products");

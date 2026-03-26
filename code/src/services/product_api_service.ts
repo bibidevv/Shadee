@@ -1,6 +1,8 @@
 import type { Product } from "../../models/product";
 import type { ApiResponse } from "../models/props/api_response";
 
+// import SecurityService from "./security_service";
+
 class ProductApiService {
 	// préfixe de l'API
 	private prefix = "/api/product";
@@ -45,7 +47,10 @@ class ProductApiService {
 	// insertion d'un enregistrement
 
 	// si le formulaire contient un champ de fichier : utiliser formData, sinon typer
-	public insert = async (data: FormData): Promise<ApiResponse<Product>> => {
+	public insert = async (
+		data: FormData,
+		token: string,
+	): Promise<ApiResponse<Product>> => {
 		// configurer la requête HTTP
 		const request = new Request(
 			`${import.meta.env.VITE_API_URL}${this.prefix}`,
@@ -54,6 +59,9 @@ class ProductApiService {
 				/* si le formulaire contient un champ de fichier, la propriété body renvoie un objet formData. 
 				Si le formulaire ne contient pas de champ de fichier, la propriété renvoie du JSON (JSON stringify)... ajouter l'en-tête Content-Type:  */
 				body: data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			},
 		);
 
@@ -68,8 +76,11 @@ class ProductApiService {
 		// retourner les résultats
 		return results;
 	};
-
-	public update = async (data: FormData): Promise<ApiResponse<null>> => {
+	// MAJ d'un enregistrement
+	public update = async (
+		data: FormData,
+		token: string,
+	): Promise<ApiResponse<null>> => {
 		// configurer la requête HTTP
 		const request = new Request(
 			`${import.meta.env.VITE_API_URL}${this.prefix}`,
@@ -78,6 +89,9 @@ class ProductApiService {
 				/* si le formulaire contient un champ de fichier, la propriété body renvoie un objet formData. 
 				Si le formulaire ne contient pas de champ de fichier, la propriété renvoie du JSON (JSON stringify)... ajouter l'en-tête Content-Type:  */
 				body: data,
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
 			},
 		);
 
@@ -96,6 +110,7 @@ class ProductApiService {
 	// suppression d'un enregistrement
 	public delete = async (
 		data: Partial<Product>,
+		token: string,
 	): Promise<ApiResponse<null>> => {
 		// configurer la requête HTTP
 		const request = new Request(
@@ -104,6 +119,7 @@ class ProductApiService {
 				method: "delete",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
 				},
 
 				// sérialiser et désérialiser

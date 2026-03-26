@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import type { AdminProductsParams } from "../models/params/admin_products_params";
 import ProductApiService from "../services/product_api_service";
+import SecurityService from "../services/security_service";
 
 const AdminProductDelete = ({
 	params,
@@ -13,10 +14,12 @@ const AdminProductDelete = ({
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		new ProductApiService().delete({ id: id }).then(() => {
-			navigate("/admin/products");
-			return;
-		});
+		new ProductApiService()
+			.delete({ id: id }, new SecurityService().getToken() as string)
+			.then(() => {
+				navigate("/admin/products");
+				return;
+			});
 	}, [id, navigate]);
 
 	// await n'est pas dispo dans useeFFECT
