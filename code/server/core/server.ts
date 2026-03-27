@@ -1,5 +1,6 @@
 import cors from "cors";
 import express, { type Router } from "express";
+import ContactRouter from "../router/contact_router";
 import HomepageRouter from "../router/homepage_router";
 import ProductRouter from "../router/product_router";
 import RoleRouter from "../router/role_router";
@@ -43,6 +44,7 @@ class Server {
 		this.router.use("/api/undertone", new UndertoneRouter().getRoutes());
 		this.router.use("/api/user", new UserRouter().getRoutes());
 		this.router.use("/api", new SecurityRouter().getRoutes());
+		this.router.use("/api/contact", new ContactRouter().getRoutes());
 	};
 
 	// démarrer le serveur
