@@ -1,0 +1,23 @@
+name: Shadee CI workflow
+
+# déclencherur du workflow
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # nom de la tache
+  CI:
+    # choix de l'OS
+    runs-on: ubuntu-latest
+
+    #étapes de la tâche
+    steps:
+      - name: Cloner le repository
+        uses: actions/checkout@v6
+      - name: Installer les dépendances
+        working-directory: code
+        run: npm ci
+      - name: Compiler le projet React
+        working-directory: code
+        run: npm run build
