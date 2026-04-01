@@ -27,4 +27,4 @@ jobs:
           sudo service mysql start 
           mysql -uroot -proot -e"source shadee.test.sql;"
           mysql -uroot -proot -e"source ia.test.sql;"
-          mysql -uroot -proot -e"show databses;"
+          mysql -uroot -proot -e"show databases;"
