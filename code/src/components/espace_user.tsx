@@ -23,8 +23,10 @@ const UserHomePage = () => {
 
 				<div className={styles.featuresGrid}>
 					<div className={styles.featureCard}>
-						<span className={styles.icon}>✔</span>
-						<p>Des recommandations adaptées à ton profil.</p>
+						<Link to="/espace-utilisateur/userproducts">
+							<span className={styles.icon}>✔</span>
+							<p>Un accès a tes produits personnalisés</p>
+						</Link>
 					</div>
 
 					<Link to="/espace-utilisateur/favoris" className={styles.featureCard}>
@@ -37,12 +39,6 @@ const UserHomePage = () => {
 						<p>Modifier ton profil.</p>
 					</Link>
 				</div>
-
-				<Link to="/products">
-					<button type="button" className={styles.button}>
-						Accéder au catalogue
-					</button>
-				</Link>
 			</div>
 		</div>
 	);

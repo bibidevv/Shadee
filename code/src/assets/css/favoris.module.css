@@ -13,3 +13,21 @@
 	color: #777;
 	font-size: 14px;
 }
+/* Bouton retour */
+.backButton {
+	grid-column: 1 / span 2;
+	margin-top: 16px;
+	padding: 10px 18px;
+	border-radius: 999px;
+	border: 1px solid var(--color-subtitle);
+	background: transparent;
+	color: var(--color-subtitle);
+	font-family: var(--font-regular);
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.backButton:hover {
+	background-color: var(--color-subtitle);
+	color: var(--color-button-text);
+}

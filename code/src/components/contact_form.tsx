@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { date } from "zod/v3";
 import styles from "../assets/css/contact.module.css";
 
 const ContactForm = () => {
@@ -10,7 +11,7 @@ const ContactForm = () => {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log({ email, subject, message });
+		console.log({ email, subject, message, date });
 	};
 
 	return (

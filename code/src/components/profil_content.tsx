@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Link } from "react-router";
 import styles from "../assets/css/profil.module.css";
 
 const ProfilContent = () => {
@@ -11,6 +12,11 @@ const ProfilContent = () => {
 			<div className={styles.card}>
 				<p>Ici tu pourras modifier tes informations personnelles.</p>
 			</div>
+			<Link to="/espace-utilisateur">
+				<button type="button" className={styles.backButton}>
+					← Retour à l'accueil
+				</button>
+			</Link>
 		</div>
 	);
 };
