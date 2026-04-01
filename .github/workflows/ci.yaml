@@ -21,3 +21,10 @@ jobs:
       - name: Compiler le projet React
         working-directory: code
         run: npm run build
+      - name: Démarrer MySQL et importer la bdd de tests
+        working-directory: code/mysql
+        run: |
+          sudo service mysql start 
+          mysql -uroot -proot -e"source shadee.test.sql;"
+          mysql -uroot -proot -e"source ia.test.sql;"
+          mysql -uroot -proot -e"show databses;"
