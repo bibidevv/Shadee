@@ -70,7 +70,7 @@ class UndertoneRepository {
 		WHERE ${this.table}.id IN (${list});  
         `;
 
-		// try / catch : récuperer els résultats de la requete ou une erreur
+		// try / catch : récuperer les résultats de la requete ou une erreur
 		try {
 			const [query] = await connection.execute(sql);
 
